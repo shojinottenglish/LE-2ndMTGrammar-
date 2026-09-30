@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英語文法 総合フラッシュカード</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #f8fafc;
+            touch-action: pan-y;
+        }
+        
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .card-transition { transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Category Badges */
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .badge-rei { background-color: #dbeafe; color: #1e40af; }
+        .badge-kaki { background-color: #dcfce7; color: #166534; }
+        .badge-ana { background-color: #fef9c3; color: #854d0e; }
+        .badge-nara { background-color: #f3e8ff; color: #6b21a8; }
+        .badge-ei { background-color: #ffedd5; color: #9a3412; }
+        .badge-wa { background-color: #fce7f3; color: #9d174d; }
+        .badge-mondai { background-color: #e0e7ff; color: #3730a3; }
+        .badge-default { background-color: #f3f4f6; color: #374151; }
+        .badge-4taku { background-color: #cffafe; color: #155e75; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800">
+
+    <!-- ================= HOME VIEW ================= -->
+    <div id="home-view" class="w-full min-h-screen flex flex-col py-10 px-4 sm:px-8 bg-slate-50 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto w-full relative z-10 flex-grow flex flex-col">
+            <div class="text-center mb-10 animate-fade-in">
+                <div class="inline-flex items-center justify-center bg-indigo-600 text-white p-4 rounded-2xl shadow-lg mb-6">
+                    <i class="fa-solid fa-layer-group text-3xl"></i>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mb-4">英語文法 総合マスター</h1>
+                <p class="text-slate-500 text-lg mb-2">Lesson 11-16 / Workbook / Insight 完全網羅版</p>
+                <p class="text-slate-400 text-sm">学習したい単元を選択してください</p>
+            </div>
+
+            <!-- Dynamic Lesson Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in pb-10" id="lesson-grid">
+                <!-- Buttons injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= STUDY VIEW ================= -->
+    <div id="study-view" class="w-full min-h-screen flex flex-col hidden bg-slate-50">
+        
+        <!-- Header -->
+        <header class="bg-white shadow-sm py-4 px-4 sm:px-6 flex justify-between items-center z-10 sticky top-0">
+            <div class="flex items-center gap-3">
+                <button id="back-btn" class="text-slate-500 hover:text-indigo-600 bg-slate-100 hover:bg-indigo-50 transition-colors px-4 py-2 rounded-full flex items-center justify-center gap-2 focus:outline-none" title="ホームに戻る">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="text-sm font-bold">ホーム</span>
+                </button>
+                <div class="h-6 w-px bg-slate-200 hidden sm:block mx-1"></div>
+                <h1 id="study-title" class="text-lg font-bold text-slate-700 tracking-tight line-clamp-1 hidden sm:block">Lesson Title</h1>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200" id="progress-text">
+                    Card 1 of --
+                </span>
+                <button id="shuffle-btn" class="text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 bg-slate-100 transition-colors w-10 h-10 rounded-full flex items-center justify-center focus:outline-none" title="シャッフル">
+                    <i class="fa-solid fa-shuffle"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-200 h-1.5">
+            <div id="progress-bar" class="bg-indigo-600 h-1.5 transition-all duration-300 ease-out w-0"></div>
+        </div>
+
+        <main class="flex-grow flex flex-col items-center justify-start sm:justify-center p-4 sm:p-8 w-full max-w-3xl mx-auto">
+            
+            <!-- Card Container -->
+            <div class="w-full h-[450px] sm:h-[400px] perspective-1000 mb-8 cursor-pointer group no-select" id="card-container">
+                <!-- Inner Card -->
+                <div id="card-inner" class="relative w-full h-full preserve-3d card-transition shadow-lg rounded-3xl group-hover:shadow-xl">
+                    
+                    <!-- Front Side -->
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-3xl border border-slate-100 flex flex-col p-6 sm:p-10 overflow-y-auto">
+                        <div class="flex justify-between items-start mb-2">
+                            <div id="front-category" class="category-badge badge-default w-max mb-0">分類</div>
+                            
+                            <!-- Actions: Speak & Star -->
+                            <div class="flex gap-2">
+                                <button id="speak-front" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-indigo-600 flex items-center justify-center transition-colors" title="英語を読み上げる">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                                <button id="star-btn" class="px-3 py-1.5 rounded-full text-xs font-bold transition-colors flex items-center gap-1 bg-slate-100 text-slate-500 hover:bg-yellow-50 hover:text-yellow-600">
+                                    <i class="fa-solid fa-star"></i> <span>苦手登録</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-grow flex flex-col items-center justify-center py-2 w-full">
+                            <p id="front-text" class="text-lg sm:text-xl font-bold text-center leading-relaxed text-slate-800 break-words w-full whitespace-pre-wrap"></p>
+                        </div>
+                        
+                        <div class="text-center text-slate-400 mt-auto text-sm animate-pulse flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-hand-pointer"></i> タップして裏返す
+                        </div>
+                    </div>
+
+                    <!-- Back Side -->
+                    <div class="absolute w-full h-full backface-hidden bg-gradient-to-br from-indigo-600 to-blue-600 rounded-3xl rotate-y-180 flex flex-col p-6 sm:p-10 shadow-[inset_0_0_40px_rgba(0,0,0,0.1)] overflow-y-auto">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-white/20 text-white px-4 py-1 rounded-full text-sm font-bold tracking-wider backdrop-blur-sm">ANSWER</div>
+                            <button id="speak-back" class="w-8 h-8 rounded-full bg-white/20 text-white hover:bg-white hover:text-indigo-600 flex items-center justify-center transition-colors" title="英語を読み上げる">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex-grow flex items-center justify-center py-4">
+                            <p id="back-text" class="text-2xl sm:text-3xl font-bold text-center leading-relaxed text-white break-words w-full whitespace-pre-wrap"></p>
+                        </div>
+                        
+                        <!-- Hint -->
+                        <div id="hint-container" class="mt-auto bg-black/10 rounded-xl p-4 backdrop-blur-sm border border-white/10 hidden">
+                            <div class="flex items-center gap-2 text-white/80 text-sm font-semibold mb-1">
+                                <i class="fa-solid fa-lightbulb text-yellow-300"></i> 解説・ヒント
+                            </div>
+                            <p id="hint-text" class="text-white text-sm sm:text-base leading-relaxed"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center justify-between w-full max-w-sm mx-auto">
+                <button id="prev-btn" class="w-14 h-14 rounded-full bg-white shadow-md text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center text-xl disabled:opacity-50 disabled:cursor-not-allowed active:scale-95">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="text-xs font-medium text-slate-400 text-center px-4 hidden sm:block">スワイプ<br>または矢印キー</div>
+                <button id="next-btn" class="w-14 h-14 rounded-full bg-white shadow-md text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center text-xl disabled:opacity-50 disabled:cursor-not-allowed active:scale-95">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        // ================= 2章・5章 データ =================
+        const chapter25Data = [
+            { no: "32", ja: "英語は国際語として広く使われている。", q: "English ( ) widely ( ) as an international language.", a: "English is widely used as an international language." },
+            { no: "33-1", ja: "多くの仕事が人工知能に取って代わられるだろう。", q: "Many jobs ( ) ( ) ( ) by AI.", a: "Many jobs will [would] be replaced by AI." },
+            { no: "33-2", ja: "個人情報が盗まれるかもしれない。", q: "Personal information ( ) ( ) ( ).", a: "Personal information may [might] be stolen." },
+            { no: "33-3", ja: "プラスチック製品はリサイクルされるべきだ。", q: "Plastics ( ) ( ) ( ).", a: "Plastics should be recycled." },
+            { no: "34", ja: "新しいバージョンがリリースされたところだ。", q: "A new version ( ) ( ) ( ).", a: "A new version has been released." },
+            { no: "35", ja: "生徒の生活習慣についての調査が行われている。", q: "A survey of student lifestyles ( ) ( ) (c ).", a: "A survey of student lifestyles is being conducted." },
+            { no: "36", ja: "ケンはサッカーがとても上手なので、友達から尊敬されている。", q: "Ken (looked/by/to/up/is) his friends because he is really good at playing soccer.", a: "Ken is looked up to by his friends because he is really good at playing soccer." },
+            { no: "37", ja: "校庭の草花は児童によって世話されている。", q: "Plants and flowers in the schoolyard (care/by/taken/are/of) the students.", a: "Plants and flowers in the schoolyard are taken care of by the students." },
+            { no: "38", ja: "今日の試合は雨のため中止になった。", q: "Today's game ( ) ( ) ( ) because of rain.", a: "Today's game was called off because of rain." },
+            { no: "39-1", ja: "ハイカーたちは吹雪に見舞われ、近くの山小屋に避難しなければならなかった。", q: "The hikers (w ) ( ) ( ) a snowstorm and had to take shelter in a nearby cabin.", a: "The hikers were caught in a snowstorm and had to take shelter in a nearby cabin." },
+            { no: "39-2", ja: "「どうして遅れたの?」 「乗っていたバスが渋滞に巻き込まれたんだ。」", q: "\"How come you were late?\" \"My bus (g)( )( ) traffic.\"", a: "\"How come you were late?\" \"My bus got caught in traffic.\"" },
+            { no: "40", ja: "その道は、秋になると落ち葉で覆われて美しく見える。", q: "The path looks beautiful when it ( ) ( ) ( ) fallen leaves in the fall.", a: "The path looks beautiful when it is covered with fallen leaves in the fall." },
+            { no: "41", ja: "先生がおもしろい冗談を言うと、教室は笑いに包まれた。", q: "The classroom ( )( )(w) laughter when the teacher told a funny joke.", a: "The classroom was filled with laughter when the teacher told a funny joke." },
+            { no: "42-1", ja: "ブラジルは、その豊かな生物多様性で広く知られている。", q: "Brazil ( )(w)( )( ) its rich biodiversity.", a: "Brazil is widely known for its rich biodiversity." },
+            { no: "42-2", ja: "ケンはクラスメートに学校でいちばんおもしろい生徒として知られている。", q: "Ken ( ) ( ) ( ) his classmates as the funniest student in school.", a: "Ken is known to his classmates as the funniest student in school." },
+            { no: "43", ja: "間もなく開演です。ご着席ください。", q: "The show is about to begin. Please (b) ( ).", a: "The show is about to begin. Please be seated." },
+            { no: "44", ja: "天候不良のため、フライトが1時間遅れている。", q: "The flight (h) ( ) (d) for an hour due to bad weather.", a: "The flight has been delayed for an hour due to bad weather." },
+            { no: "45", ja: "私は小さな町で生まれ育ったので、そこにいる人をみんな知っていた。", q: "I ( )(b)( )( ) in a small town, so I knew everyone there.", a: "I was born and raised in a small town, so I knew everyone there." },
+            { no: "46", ja: "サッカー選手が試合中に、けがをした。", q: "A soccer player ( ) ( ) during the game.", a: "A soccer player was [got] injured during the game." },
+            { no: "47", ja: "ポール・ウォーカーは2013年に車の事故で亡くなった。", q: "Paul Walker ( )(k)( ) a car accident in 2013.", a: "Paul Walker was killed in a car accident in 2013." },
+            { no: "100", ja: "私の夢はITエンジニアになることだ。", q: "( ) ( ) ( ) ( ) ( ) an IT engineer.", a: "My dream is to become [be] an IT engineer." },
+            { no: "101", ja: "生徒が勉強と部活を両立させるのは簡単ではない。", q: "(I) ( ) ( ) ( ) for students ( ) (b) their studies and club activities.", a: "It is not easy for students to balance their studies and club activities." },
+            { no: "102", ja: "翻訳アプリは外国人とのコミュニケーションをより簡単にしてくれる。", q: "Translation apps (m) ( )( )( )( ) with people from other countries.", a: "Translation apps make it easier to communicate with people from other countries." },
+            { no: "103", ja: "困ったときには、相談する誰かが必要だ。", q: "When you are in trouble, you need _______________.", a: "When you are in trouble, you need someone to talk to [with]." },
+            { no: "104", ja: "私は情報を得るためにインターネットを使う。", q: "I use the internet ( ) ( ) ( ).", a: "I use the internet to get information." },
+            { no: "105", ja: "元気そうで何よりです。", q: "( )(g) ( )( ) you looking so well.", a: "I'm glad to see you looking so well." },
+            { no: "106", ja: "ハンバーガー1個のためにこんなに長く待つなんて、私たちどうかしているね。", q: "We must ( ) ( ) ( ) ( ) this long for a burger.", a: "We must be crazy to wait this long for a burger." },
+            { no: "107", ja: "目が覚めると、道向かいの公園はすっかり雪に覆われていた。", q: "I ( )( )( )(f) that snow had completely covered the park across the street.", a: "I woke up to find that snow had completely covered the park across the street." },
+            { no: "108", ja: "学校に急いで行ったが、休日だと気づいただけだった。", q: "I rushed to school, ( ) ( ) ( ) it was a holiday.", a: "I rushed to school, only to realize it was a holiday." },
+            { no: "109", ja: "ネット上に個人情報を投稿しないように気をつけなさい。", q: "Be careful (n)( )( )(p) personal information online.", a: "Be careful not to post personal information online." },
+            { no: "110", ja: "傘をどこかに置き忘れてきたようだ。", q: "I seem ( ) ( ) (l) my umbrella somewhere.", a: "I seem to have left my umbrella somewhere." },
+            { no: "111", ja: "将来の仕事はまだ決めていませんが、近いうちに決めたいと思っています。", q: "I haven't decided on my future career yet, but ( )( )( ) soon.", a: "I haven't decided on my future career yet, but I hope to soon." },
+            { no: "112", ja: "その男性は何を着ようか考えている。", q: "The man is thinking about ( )( )( ).", a: "The man is thinking about what to wear." },
+            { no: "113", ja: "ほとんどの生徒はコンピューターの使い方を知っている。", q: "Most students know ______________ computers.", a: "Most students know how to use computers." },
+            { no: "114-1", ja: "子どもがスマートフォンを持つのはいい考えだ。", q: "It is a good idea ______________ a smartphone.", a: "It is a good idea for children to have a smartphone." },
+            { no: "114-2", ja: "インターンシップとは学生が会社で働く機会のことだ。", q: "An internship is (a student/for/an opportunity/to/work) for a company.", a: "An internship is an opportunity for a student to work for a company." },
+            { no: "115-1", ja: "親切にも友達が試験前にノートを貸してくれた。", q: "It was ______________ to lend me her notebook before the exam.", a: "It was kind of my friend to lend me her notebook before the exam." },
+            { no: "115-2", ja: "身体障害者用駐車場に駐車するなんて、その運転手は配慮に欠けている。", q: "It is (t) ( ) the ( ) to park in the disabled parking spot.", a: "It is thoughtless of the driver to park in the disabled parking spot." },
+            { no: "116-1", ja: "日本の企業は従業員に忠誠心を求める。", q: "Japanese companies (their/loyal/be/employees/want/to).", a: "Japanese companies want their employees to be loyal." },
+            { no: "116-2", ja: "食堂で私たちと一緒に昼食をいかがでしょうか。", q: "We (join/you/to/like/us/would) for lunch in the cafeteria.", a: "We would like you to join us for lunch in the cafeteria." },
+            { no: "117-1", ja: "今日では、生徒に給食を全部食べさせる教師はほとんどいない。", q: "Today, few teachers (m) ( ) (e) all of their school meals.", a: "Today, few teachers make students eat all of their school meals." },
+            { no: "117-2", ja: "君の冗談はいつも笑える。", q: "Your jokes always (m) ( )(l).", a: "Your jokes always make me laugh." },
+            { no: "118", ja: "その女性はウエイターに一杯の水を持ってきてもらった。", q: "The woman ( ) a ( ) (b) her a glass of water.", a: "The woman had a waiter bring her a glass of water." },
+            { no: "119", ja: "2つの理由があります。説明いたします。", q: "There are two reasons. ( )(m)( ).", a: "There are two reasons. Let me explain." },
+            { no: "120", ja: "母はいつも弟に野菜を食べさせる。", q: "My mother always (g) my ( ) ( ) ( ) vegetables.", a: "My mother always gets my brother to eat vegetables." },
+            { no: "121", ja: "ケンはサラが学校の図書館に入るのを見た。", q: "Ken ( ) ( ) ( ) the school library.", a: "Ken saw Sara enter the school library." },
+            { no: "122", ja: "肩に何かが触れたような気がして、私は悲鳴を上げた。", q: "I ( ) (s) (t) my shoulder, and I screamed.", a: "I felt something touch my shoulder, and I screamed." },
+            { no: "123", ja: "子どもたちは美術館の前に並ばされた。", q: "The children ( ) ( ) ( ) ( ) (u) in front of the museum.", a: "The children were made to line up in front of the museum." },
+            { no: "124", ja: "容疑者が混雑した公園に入るのが目撃された。", q: "The suspect ( ) ( )( )( ) the crowded park.", a: "The suspect was seen to enter the crowded park." },
+            { no: "125-1", ja: "タブレットは持ち運びやすく使いやすい。", q: "Tablets ______________ and use.", a: "Tablets are easy to carry and use." },
+            { no: "125-2", ja: "数学の問題は練習しないと解くのが難しい。", q: "Math problems ______________ without practice.", a: "Math problems are difficult [hard] to solve without practice." },
+            { no: "126", ja: "本日、G7の首脳が広島を訪問することになっている。", q: "The G7 leaders (a) ( ) ( ) Hiroshima today.", a: "The G7 leaders are to visit Hiroshima today." },
+            { no: "127", ja: "目標を達成するためには、きちんと計画を立てなければならない。", q: "If you (a) ( ) (a) your goals, you have to plan properly.", a: "If you are to achieve your goals, you have to plan properly." },
+            { no: "128", ja: "その少年が公園に着くと、友達の姿はどこにもなかった。", q: "When the boy arrived at the park, his friends (w) (n)( ) ( )( ).", a: "When the boy arrived at the park, his friends were nowhere to be seen [found]." },
+            { no: "129", ja: "「あなたは日本国外で暮らしたいですか。」「どちらとも言えません。」", q: "\" (W)( )( )( )( ) outside Japan?\" \"Yes and no.\"", a: "\"Would you like to live outside Japan?\" \"Yes and no.\"" },
+            { no: "130-1", ja: "健康でいるにはバランスのとれた食事をとることが重要だ。", q: "It is important to eat a balanced diet ( )( )( )(s) (h).", a: "It is important to eat a balanced diet in order to stay healthy." },
+            { no: "130-2", ja: "他人の気持ちを傷つけないように、言葉を慎重に選ぶべきだ。", q: "We should choose our words carefully (to/hurt/in/not/the feelings/order) of others.", a: "We should choose our words carefully in order not to hurt the feelings of others." },
+            { no: "131-1", ja: "彼は親切にも年配の女性のためにドアを開けておいた。", q: "He was (k)( )( )(h) the door open for the elderly woman.", a: "He was kind enough to hold the door open for the elderly woman." },
+            { no: "131-2", ja: "彼は親切にも年配の女性のためにドアを開けておいた。(soを使った表現)", q: "He was ( )( )( )( )(h) the door open for the elderly woman.", a: "He was so kind as to hold the door open for the elderly woman." },
+            { no: "131-3", ja: "彼女は強いので簡単にはあきらめない。", q: "She is ( ) ( ) ( ) ( ) ( ) ( ) easily.", a: "She is strong enough not to give up easily." },
+            { no: "132", ja: "今週はあまりに忙しくてプロジェクトの手伝いができない。", q: "I'm (t) ( ) ( )( )( )( ) the project this week.", a: "I'm too busy to help with the project this week." },
+            { no: "133-1", ja: "チャットを始めるにはアイコンをクリックするだけでいい。", q: "(you/click on/all/to/have/do/is) the icon to start chatting.", a: "All you have to do is click on the icon to start chatting." },
+            { no: "133-2", ja: "チャットを始めるにはアイコンをクリックするだけでいい。(onlyを使った表現)", q: "You (o)( )( )( )( ) the icon to start chatting.", a: "You only have to click on the icon to start chatting." },
+            { no: "134", ja: "実を言うと、私は歌があまり得意ではない。", q: "To ______________, I'm not very good at singing.", a: "To tell (you) the truth, I'm not very good at singing." },
+            { no: "135", ja: "さらに悪いことに、その女性はバスに乗り遅れた。", q: "( )( )( )( ), the woman missed her bus.", a: "To make matters worse, the woman missed her bus." },
+            { no: "136", ja: "貧困が子どもの教育に影響を与えることは言うまでもない。", q: "( )( )(s), poverty affects children's education.", a: "Needless to say, poverty affects children's education." },
+            { no: "137", ja: "インターネットは、いわば、異文化への入り口だ。", q: "The internet is, ( ) ( ) ( ), a gateway to different cultures.", a: "The internet is, so to speak, a gateway to different cultures." },
+            { no: "138", ja: "母国語の英語はもちろんのこと、ナオミはフランス語も流ちょうに話す。", q: "Naomi speaks French fluently, (t)(s)(n)(o) her native English.", a: "Naomi speaks French fluently, to say nothing of her native English." }
+        ];
+
+        // ================= Lesson 11〜16 データ =================
+        const lesson11to16Data = [
+            { front: "【Lesson 11 - 1-1】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n昨日そのケーキは小さな女の子に買われた。\nThe cake ( ) by a little girl yesterday. [buy]", back: "The cake (was bought) by a little girl yesterday.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 1-2】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n私のお気に入りのシャツは洗濯中だ。\nMy favorite shirt ( ) now. [wash]", back: "My favorite shirt (is being washed) now.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 1-3】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nパンがちょうど焼き上がったところだ。\nThe bread ( ). [bake]", back: "The bread (has just been baked).", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 1-4】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nその門は毎朝8時に開けられる。\nThe gate ( ) at eight every morning. [open]", back: "The gate (is opened) at eight every morning.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 1-5】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n彼の名前はリストの中に見つけることができる。\nHis name ( ) in the list. [find]", back: "His name (can be found) in the list.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-1】日本語に合うように、( )に適切な語を入れなさい。\nどの小説が最初に書かれたのですか。\nWhich novel ( )( ) first?", back: "Which novel (was)(written) first?", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-2】日本語に合うように、( )に適切な語を入れなさい。\nあの男の子はみんなから愛されているに違いない。\nThat boy ( )( )( ) by everyone.", back: "That boy (must)(be)(loved) by everyone.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-3】日本語に合うように、( )に適切な語を入れなさい。\n訪問客は誰でも歓迎されるだろう。\nAny visitor ( )( )( ).", back: "Any visitor (will)(be)(welcomed).", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-4】日本語に合うように、( )に適切な語を入れなさい。\n彼の代表作は何世代にもわたって演奏されてきた。\nHis masterpieces ( )( )( ) through generations.", back: "His masterpieces (have)(been)(played / performed) through generations.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-5】日本語に合うように、( )に適切な語を入れなさい。\nノーベル平和賞がその科学者に与えられた。\nThe Nobel Peace Prize ( )( ) to the scientist.", back: "The Nobel Peace Prize (was)(given) to the scientist.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 2-6】日本語に合うように、( )に適切な語を入れなさい。\nこの教室では英語が話されるべきだ。\nEnglish ( )( )( ) in this classroom.", back: "English (should)(be)(spoken) in this classroom.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 3-1】各文を、下線部を主語にして受動態に書きかえなさい。\nLucy made [this doll] last year.", back: "This doll was made by Lucy last year.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 3-2】各文を、下線部を主語にして受動態に書きかえなさい。\nWho drew [the map]?", back: "By whom was the map drawn?", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 3-3】各文を、下線部を主語にして受動態に書きかえなさい。\nMany foreign people visit [the temple] every day.", back: "The temple is visited by many foreign people every day.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 3-4】各文を、下線部を主語にして受動態に書きかえなさい。\nThey will develop [a new medicine] in the laboratory.", back: "A new medicine will be developed in the laboratory.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 3-5】各文を、下線部を主語にして受動態に書きかえなさい。\nMr. Burton has just repaired [the door].", back: "The door has just been repaired by Mr. Burton.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-1】( )内の語句を並べかえて、英文を完成させなさい。\n(to / carried / wood / Japan / is / a lot of) from Indonesia.", back: "A lot of wood is carried to Japan from Indonesia.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-2】( )内の語句を並べかえて、英文を完成させなさい。\n(was / this animation / the Japanese students / by / movie / made)?", back: "Was this animation movie made by the Japanese students?", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-3】( )内の語句を並べかえて、英文を完成させなさい。\nThe mansion (been / not / a / has / used / for / long time).", back: "The mansion has not been used for a long time.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-4】( )内の語句を並べかえて、英文を完成させなさい。\n(scolded / was / the teacher / who / being / by) in this room at that time?", back: "Who was being scolded by the teacher in this room at that time?", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-5】( )内の語句を並べかえて、英文を完成させなさい。\n(be / the / going / is / moved / cupboard / to).", back: "The cupboard is going to be moved.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 4-6】( )内の語句を並べかえて、英文を完成させなさい。\n(was / by / kitten / rolled / a ball / being / the) then.", back: "A ball was being rolled by the kitten then.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-1】次の英文を日本語に直しなさい。\nBoth English and French are spoken in Canada.", back: "カナダでは英語とフランス語の両方が話されている。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-2】次の英文を日本語に直しなさい。\nMany surveillance cameras are equipped in this building.", back: "この建物には多くの監視カメラが設置されている。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-3】次の英文を日本語に直しなさい。\nParking is not allowed here.", back: "ここでは駐車は許可されていない（駐車禁止だ）。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-4】次の英文を日本語に直しなさい。\nWhere were those cars manufactured?", back: "それらの車はどこで製造されましたか。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-5】次の英文を日本語に直しなさい。\nThis song used to be sung by young people.", back: "この歌はかつて若者たちによって歌われていた。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - 5-6】次の英文を日本語に直しなさい。\nYour homework will have been done by tomorrow.", back: "あなたの宿題は明日までには終わっているだろう。", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - CHALLENGE! 1】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\nテレビは誰によって発明されたのですか。(invent)", back: "Who was the television invented by? / By whom was the television invented?", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - CHALLENGE! 2】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\nその犬は彼女によって飼われている。", back: "The dog is kept by her.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - CHALLENGE! 3】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\nその部屋は掃除されているところだ。", back: "The room is being cleaned.", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 11 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nA strange message appeared while the software [is] being installed.", back: "is → was (※時制の一致)", hint: "Lesson 11: 受動態①" },
+            { front: "【Lesson 12 - 1-1】各文を、下線部を主語にして受動態に書きかえなさい。\nMany children sent [the baseball player] [fan letters].", back: "The baseball player was sent fan letters by many children. / Fan letters were sent to the baseball player by many children.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 1-2】各文を、下線部を主語にして受動態に書きかえなさい。\nHis friends call [him] D.J.", back: "He is called D.J. by his friends.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 1-3】各文を、下線部を主語にして受動態に書きかえなさい。\nA stranger spoke to [me] on the street yesterday.", back: "I was spoken to by a stranger on the street yesterday.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 1-4】各文を、下線部を主語にして受動態に書きかえなさい。\nLuke chose [the boy] [a good book].", back: "A good book was chosen for the boy by Luke.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 1-5】各文を、下線部を主語にして受動態に書きかえなさい。\nWho takes care of [your dog] every day?", back: "Who is your dog taken care of by every day? / By whom is your dog taken care of every day?", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 1-6】各文を、下線部を主語にして受動態に書きかえなさい。\nPeople elected [him] mayor of this town.", back: "He was elected mayor of this town (by people).", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 2-1】日本語に合うように、( )に適切な語を入れなさい。\nホーキング博士の業績は世界中の人に知られている。\nDr. Hawking's achievements are ( )( ) people all over the world.", back: "Dr. Hawking's achievements are (known)(to) people all over the world.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 2-2】日本語に合うように、( )に適切な語を入れなさい。\nその年老いた女性はある有名な歌手の母親だと言われている。\nThe old woman ( )( )( )( ) the mother of a famous singer.", back: "The old woman (is)(said)(to)(be) the mother of a famous singer.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 2-3】日本語に合うように、( )に適切な語を入れなさい。\n太宰治は青森で生まれた。\nDazai Osamu ( )( )( ) Aomori.", back: "Dazai Osamu (was)(born)(in) Aomori.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 2-4】日本語に合うように、( )に適切な語を入れなさい。\nみんながその光景に驚いた。\nEveryone ( )( )( ) the sight.", back: "Everyone (was)(surprised)(at) the sight.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 3-1】( )内の語句を並べかえて、英文を完成させなさい。\nHe (to / believed / Japan / is / in / be).", back: "He is believed to be in Japan.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 3-2】( )内の語句を並べかえて、英文を完成させなさい。\nThe meeting (because / put / were / was / many people / off) absent.", back: "The meeting was put off because many people were absent.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 3-3】( )内の語句を並べかえて、英文を完成させなさい。\n(eight / the / were / train / passengers on) injured.", back: "Eight passengers on the train were injured.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 3-4】( )内の語句を並べかえて、英文を完成させなさい。\nI (in / jam / was / traffic / caught / a).", back: "I was caught in a traffic jam.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 4-1】次の文をほぼ同じ意味になるように書きかえた文として、下の文が正しければ○、誤りがあれば正しい語句を書きなさい。\nThey cannot put up with his bad attitude. / His bad attitude cannot be put up by them.", back: "誤り。 put up by them → put up with by them", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 4-2】次の文をほぼ同じ意味になるように書きかえた文として、下の文が正しければ○、誤りがあれば正しい語句を書きなさい。\nThe big dog frightened the children. / The children were frightened of the big dog.", back: "○", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 4-3】次の文をほぼ同じ意味になるように書きかえた文として、下の文が正しければ○、誤りがあれば正しい語句を書きなさい。\nThey called the old man an ambulance. / An ambulance was called to the old man.", back: "誤り。 called to → called for", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 5-1】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nエレンは天才だと思われている。[think]\nEllen ( ) a genius.", back: "Ellen (is thought to be) a genius.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 5-2】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nユキは日本の歴史に興味がある。[interest]\nYuki ( ) Japanese history.", back: "Yuki (is interested in) Japanese history.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 5-3】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n私は生徒たちからいくつか質問を受けた。[ask]\nI ( ) by the students.", back: "I (was asked some questions) by the students.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 5-4】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n窓はその子どもによって開けっ放しにされた。[leave]\nThe window ( ) by the child.", back: "The window (was left open) by the child.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 5-5】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nスペイン語は学校で、その女性によって生徒たちに教えられている。[teach]\nSpanish ( ) at school.", back: "Spanish (is taught to the students by the woman) at school.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 6-1】次の英文を日本語に直しなさい。\nThe pot is filled with hot water.", back: "その鍋はお湯で満たされている。", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 6-2】次の英文を日本語に直しなさい。\nThe driver was wounded in the car accident.", back: "その運転手は自動車事故で負傷した。", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - 6-3】次の英文を日本語に直しなさい。\nShe was seated at the computer.", back: "彼女はコンピューターの前に座っていた。", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - CHALLENGE! 1】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\nその女性は白い服を着ていた。", back: "The woman was dressed in white.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - CHALLENGE! 2】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\n彼は新しい学校に満足しています。", back: "He is satisfied with his new school.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - CHALLENGE! 3】次の日本語を英語に直しなさい。ただし、受動態を使うこと。\nその男の子は彼の祖父によってタロウ (Taro)と名付けられた。", back: "The boy was named Taro by his grandfather.", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 12 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nShe has been [married with] him for a year.", back: "married with → married to", hint: "Lesson 12: 受動態②" },
+            { front: "【Lesson 13 - 1-1】日本語に合うように、( )に適切な語を入れなさい。\n私は妹を迎えに空港に行った。\nI went to the airport ( )( ) my sister.", back: "I went to the airport (to)(meet) my sister.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 1-2】日本語に合うように、( )に適切な語を入れなさい。\nもう1日ここにとどまることができる。\n( ) is possible ( ) stay here another day.", back: "(It) is possible (to) stay here another day.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 1-3】日本語に合うように、( )に適切な語を入れなさい。\n彼は今日、しなければならない宿題がたくさんある。\nHe has a lot of ( )( )( ) today.", back: "He has a lot of (homework)(to)(do) today.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 1-4】日本語に合うように、( )に適切な語を入れなさい。\n彼女の仕事は本を書くことだ。\nHer job ( )( )( ) books.", back: "Her job (is)(to)(write) books.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 1-5】日本語に合うように、( )に適切な語を入れなさい。\nその男性は目が覚めると知らない部屋の中にいることに気付いた。\nThe man woke up ( )( ) himself in a strange room.", back: "The man woke up (to)(find) himself in a strange room.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-1】下線部の不定詞の用法を答え、全文を和訳しなさい。\n[To reserve] the restaurant is very difficult.", back: "名詞的用法。\n和訳：そのレストランを予約することはとても難しい。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-2】下線部の不定詞の用法を答え、全文を和訳しなさい。\nI left home early [to play] soccer at school.", back: "副詞的用法。\n和訳：私は学校でサッカーをするために早く家を出た。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-3】下線部の不定詞の用法を答え、全文を和訳しなさい。\nI decided [to go] to the US [to study] economics.", back: "最初の不定詞：名詞的用法、2つ目の不定詞：副詞的用法。\n和訳：私は経済学を学ぶためにアメリカに行くことを決心した。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-4】下線部の不定詞の用法を答え、全文を和訳しなさい。\nLucy was the first person [to arrive].", back: "形容詞的用法。\n和訳：ルーシーは到着した最初の人だった。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-5】下線部の不定詞の用法を答え、全文を和訳しなさい。\nPlease give me something cold [to drink].", back: "形容詞的用法。\n和訳：私に何か冷たい飲み物をください。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 2-6】下線部の不定詞の用法を答え、全文を和訳しなさい。\nShe was very sad [to read] the letter.", back: "副詞的用法。\n和訳：彼女はその手紙を読んでとても悲しかった。", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 3-1】( )内の語を並べかえて、英文を完成させなさい。\nHow (ticket / you / a / are / lucky / to / get)!", back: "How lucky you are to get a ticket!", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 3-2】( )内の語を並べかえて、英文を完成させなさい。\nShe ran as fast as she could (get / to / only / place / third).", back: "She ran as fast as she could only to get third place.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 3-3】( )内の語を並べかえて、英文を完成させなさい。\nHe thought (develop / it / his / to / skill / necessary / research).", back: "He thought it necessary to develop his research skill.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 3-4】( )内の語を並べかえて、英文を完成させなさい。\nThis is the best (good / way / pitcher / a / to / be).", back: "This is the best way to be a good pitcher.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 4-1】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。ただし、不定詞を使うこと。\nWe have to obey the law. = It is our duty ( )", back: "It is our duty (to obey the law).", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 4-2】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。ただし、不定詞を使うこと。\nEveryone was disappointed when they found he was absent. = Everyone was disappointed ( ) he was absent.", back: "Everyone was disappointed (to find) he was absent.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 4-3】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。ただし、不定詞を使うこと。\nI found that it was difficult to finish the work alone. = I found ( ) the work alone.", back: "I found (it difficult to finish) the work alone.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 4-4】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。ただし、不定詞を使うこと。\nThere are many sightseeing spots in London. You should visit them. = There are ( ) in London.", back: "There are (many sightseeing spots to visit) in London.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 4-5】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。ただし、不定詞を使うこと。\nI do some exercise after lunch, because I want to refresh my body. = I do some exercise after lunch ( ).", back: "I do some exercise after lunch (to refresh my body).", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-1】日本語に合うように、下線部に適切な語句を補いなさい。\n早寝早起きすることはとてもよいことです。(keep early hours)\nIt is ( )", back: "It is (very good to keep early hours).", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-2】日本語に合うように、下線部に適切な語句を補いなさい。\nビルは明日までにやらなければならないことがたくさんある。\nBill has ( ) by tomorrow.", back: "Bill has (a lot of things to do) by tomorrow.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-3】日本語に合うように、下線部に適切な語句を補いなさい。\nそんなにたくさん練習するなんて、彼は努力家に違いない。\nHe must ( )(hard worker)( ) that much.", back: "He must (be a)(hard worker)(to practice) that much.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-4】日本語に合うように、下線部に適切な語句を補いなさい。\n彼はルーシーからプレゼントをもらって非常に驚いた。\nHe was ( ) from Lucy.", back: "He was (very surprised to get a present) from Lucy.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-5】日本語に合うように、下線部に適切な語句を補いなさい。\nサッカーの試合を見るのはとてもはらはらする。\nTo ( ) very exciting.", back: "To (watch a soccer game is) very exciting.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - 5-6】日本語に合うように、下線部に適切な語句を補いなさい。\n私は彼女と握手するために、何時間も並んで待った。\nI waited in line for many hours ( ).", back: "I waited in line for many hours (to shake hands with her).", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - CHALLENGE! 1】次の日本語を英語に直しなさい。ただし、不定詞を使うこと。\n大声で歌うことは楽しい。(loudly)", back: "To sing loudly is fun. / It is fun to sing loudly.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - CHALLENGE! 2】次の日本語を英語に直しなさい。ただし、不定詞を使うこと。\n私にはそのDVDを見ている時間がありません。", back: "I have no time to watch the DVD. / I don't have time to watch the DVD.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - CHALLENGE! 3】次の日本語を英語に直しなさい。ただし、不定詞を使うこと。\n彼女は真実を知って残念に思った。", back: "She was sorry to know the truth.", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 13 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nThe boy has a lot of friends to [play].", back: "play → play with", hint: "Lesson 13: 不定詞①" },
+            { front: "【Lesson 14 - 1-1】( )内から適切なほうを選びなさい。\nI wasn't told when to (begin / be begun) the meeting.", back: "begin", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 14 - 1-2】( )内から適切なほうを選びなさい。\nThe charm seems to (have come / come) off the keychain again.", back: "have come", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 14 - 1-3】( )内から適切なほうを選びなさい。\nThe report needs to (have submitted / be submitted) by Monday.", back: "be submitted", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 14 - 1-4】( )内から適切なほうを選びなさい。\nThe kind man showed me (what / how) to get to the station.", back: "how", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 14 - 1-5】( )内から適切なほうを選びなさい。\nJames seems to (have had / be having) a good time with his family now.", back: "be having", hint: "Lesson 15: 不定詞③" }
+        ];
+
+        // ================= Workbook 追加データ =================
+        const workbookDataRaw = [
+            { f: "【例文】彼女は子どもたちに愛されている。", b: "She is loved by the kids.", h: "受動態の基本形。動作主は by で示す。" },
+            { f: "【例文】オーストリアではドイツ語が話されている。", b: "German is spoken in Austria.", h: "不特定の人々が動作主のため by them は省略。" },
+            { f: "【例文】私たちはパーティーに招待されなかった。", b: "We were not invited to the party.", h: "受動態の否定文。" },
+            { f: "【例文】あなたはパーティーに招待されましたか。", b: "Were you invited to the party?", h: "受動態の疑問文。" },
+            { f: "【例文】パーティーはどこで開かれましたか。", b: "Where was the party held?", h: "疑問詞＋受動態の疑問文。" },
+            { f: "【例文】このレポートは明日までに終わらせなければならない。", b: "This essay must be finished by tomorrow.", h: "助動詞＋be＋過去分詞" },
+            { f: "【例文】彼の新しい映画は5月に公開されるだろう。", b: "His new movie will be released in May.", h: "未来を表す受動態" },
+            { f: "【例文】角に新しいビルが建てられているところだ。", b: "A new building is being built on the corner.", h: "進行形の受動態 (be being 過去分詞)" },
+            { f: "【例文】壁に触らないで。ちょうど塗られたばかりだ。", b: "Don't touch the wall. It has just been painted.", h: "現在完了の受動態 (have been 過去分詞)" }
+        ];
+
+        // ================= マスターデータの構築 =================
+        const allFlashcards = [];
+
+        // 2章・5章をフォーマット
+        chapter25Data.forEach(card => {
+            let cat = "問題";
+            let fText = `${card.ja}\n\n${card.q}`;
+            if (card.q.match(/\([a-zA-Z\s\'\-]+(?:\/[a-zA-Z\s\'\-]+)+\)/) || card.q.includes(' / ')) {
+                cat = "並べかえ";
+                fText = `( )内の語句を正しく並び変えなさい。\n\n${card.ja}\n\n${card.q}`;
+            }
+            allFlashcards.push({ lesson: "2_5", category: cat, front: fText, back: card.a, hint: `No. ${card.no}` });
+        });
+
+        // Lesson 11-16をフォーマット
+        lesson11to16Data.forEach(card => {
+            let cat = "文法ポイント";
+            let fText = card.front;
+            const match = fText.match(/^【(.*?)】(.*)/s);
+            if(match) { cat = match[1]; fText = match[2].trim(); }
+            
+            let l = "all";
+            const searchTxt = (card.hint || "") + " " + (card.front || "");
+            if (searchTxt.includes("Lesson 11")) l = "11";
+            else if (searchTxt.includes("Lesson 12")) l = "12";
+            else if (searchTxt.includes("Lesson 13")) l = "13";
+            else if (searchTxt.includes("Lesson 14")) l = "14";
+            else if (searchTxt.includes("Lesson 15")) l = "15";
+            else if (searchTxt.includes("Lesson 16")) l = "16";
+
+            allFlashcards.push({ lesson: l, category: cat, front: fText, back: card.back, hint: card.hint });
+        });
+
+        // Workbookをフォーマット
+        workbookDataRaw.forEach(card => {
+            let cat = "文法ポイント";
+            let fText = card.f;
+            const match = fText.match(/^【(.*?)】(.*)/s);
+            if(match) { cat = match[1]; fText = match[2].trim(); }
+            allFlashcards.push({ lesson: "workbook", category: cat, front: fText, back: card.b, hint: card.h });
+        });
+
+        // ================= 各種ヘルパー関数 =================
+
+        // 答え文字列をクリーンアップ（[ ]や( / )の削除など）し、裏面の表示用にも使う
+        function cleanAnswer(ans) {
+            let a = ans.replace(/\[.*?\]/g, ''); 
+            if (a.includes('/')) {
+                a = a.replace(/\(([^/]+)\s*\/[^)]+\)/g, '$1'); 
+            }
+            // カッコを削除する際にスペースに置き換えることで、(must)(be) が mustbe になるのを防ぐ
+            a = a.replace(/[()]/g, ' '); 
+            return a.replace(/\s+/g, ' ').trim();
+        }
+
+        // 正規表現用のエスケープ
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // 穴埋め用の正解を「元の文脈（前後の単語）」から引き算して抜き出す関数
+        function extractBlankWords(questionEngWithBlank, plainAns) {
+            let qParts = questionEngWithBlank.split('()');
+            let result = plainAns.replace(/[.,?!]/g, '').trim();
+            
+            if (qParts.length === 2) {
+                let prefix = qParts[0].replace(/[.,?!]/g, '').trim();
+                let suffix = qParts[1].replace(/[.,?!]/g, '').trim();
+                
+                if (prefix) {
+                    let regex = new RegExp("^" + escapeRegExp(prefix), "i");
+                    if (regex.test(result)) result = result.replace(regex, '').trim();
+                    else {
+                        let idx = result.toLowerCase().indexOf(prefix.toLowerCase());
+                        if (idx !== -1) result = result.substring(idx + prefix.length).trim();
+                    }
+                }
+                
+                if (suffix) {
+                    let regex = new RegExp(escapeRegExp(suffix) + "$", "i");
+                    if (regex.test(result)) result = result.replace(regex, '').trim();
+                    else {
+                        let idx = result.toLowerCase().lastIndexOf(suffix.toLowerCase());
+                        if (idx !== -1) result = result.substring(0, idx).trim();
+                    }
+                }
+                return result.trim();
+            }
+            return result;
+        }
+
+        // 全文用のダミー文生成
+        function generateDummySentence(correctText) {
+            let dummy = correctText;
+            let isCap = /^[A-Z]/.test(dummy);
+
+            const replacements = [
+                { from: /\bis\b/, to: 'was' }, { from: /\bwas\b/, to: 'is' },
+                { from: /\bare\b/, to: 'were' }, { from: /\bwere\b/, to: 'are' },
+                { from: /\bhas been\b/, to: 'is' }, { from: /\bhave been\b/, to: 'are' },
+                { from: /\bto\b/, to: 'for' }, { from: /\bfor\b/, to: 'to' },
+                { from: /\bwith\b/, to: 'by' }, { from: /\bby\b/, to: 'with' }
+            ];
+
+            let replaced = false;
+            for (let r of replacements) {
+                if (r.from.test(dummy)) {
+                    dummy = dummy.replace(r.from, r.to);
+                    replaced = true;
+                    break;
+                }
+            }
+
+            if (!replaced && /\bto\s+[a-z]+/.test(dummy)) {
+                dummy = dummy.replace(/\bto\s+([a-z]+)/, 'for $1ing');
+                replaced = true;
+            }
+            if (isCap) dummy = dummy.charAt(0).toUpperCase() + dummy.slice(1);
+            return dummy;
+        }
+
+        // カッコ穴埋め用のダミー語句生成
+        function generateDummyWords(correctText) {
+            let d = correctText.trim();
+            
+            if (d === "is") return ["was", "are", "be"][Math.floor(Math.random()*3)];
+            if (d === "was") return ["is", "were", "been"][Math.floor(Math.random()*3)];
+            if (d === "are") return ["were", "is", "be"][Math.floor(Math.random()*3)];
+            if (d === "were") return ["are", "was", "been"][Math.floor(Math.random()*3)];
+            if (d === "to") return ["for", "with", "by"][Math.floor(Math.random()*3)];
+            if (d === "for") return ["to", "with", "of"][Math.floor(Math.random()*3)];
+            if (d === "with") return ["by", "to", "for"][Math.floor(Math.random()*3)];
+            if (d === "by") return ["with", "for", "to"][Math.floor(Math.random()*3)];
+            if (d === "how to") return "what to";
+            if (d === "what to") return "how to";
+            
+            if (/\bis\b/.test(d)) return d.replace(/\bis\b/g, 'was');
+            if (/\bwas\b/.test(d)) return d.replace(/\bwas\b/g, 'is');
+            if (/\bare\b/.test(d)) return d.replace(/\bare\b/g, 'were');
+            if (/\bwere\b/.test(d)) return d.replace(/\bwere\b/g, 'are');
+            if (/\bhas\b/.test(d)) return d.replace(/\bhas\b/g, 'had');
+            if (/\bhave\b/.test(d)) return d.replace(/\bhave\b/g, 'had');
+            if (/\bto\b/.test(d)) return d.replace(/\bto\b/g, 'for');
+            if (/\bfor\b/.test(d)) return d.replace(/\bfor\b/g, 'to');
+            if (/\bby\b/.test(d)) return d.replace(/\bby\b/g, 'with');
+            if (/\bwith\b/.test(d)) return d.replace(/\bwith\b/g, 'by');
+
+            if (d.includes('ing')) return d.replace('ing', 'ed');
+            if (d.includes('ed')) return d.replace('ed', 'ing');
+            
+            const prefixes = ["to ", "for ", "not to ", "be "];
+            return prefixes[Math.floor(Math.random() * prefixes.length)] + d.split(' ')[0];
+        }
+
+        // 誤り訂正問題専用のダミー生成
+        function generateDummyForCorrection(left, right) {
+            let dummies = [];
+            if (right === "was") dummies = ["had been", "is being", "to be"];
+            else if (right === "married to") dummies = ["married with", "marrying to", "married in"];
+            else if (right === "play with") dummies = ["playing", "to play", "play for"];
+            else if (right === "to go") dummies = ["going", "go", "gone"];
+            else if (right === "how to play") dummies = ["playing", "what to play", "play"];
+            else if (right.includes("削除する")) dummies = ["そのまま残す", left + "s にする", "to " + left + " にする"];
+            else dummies = [right + "ing", "to " + right, "for " + right];
+            return dummies;
+        }
+
+        // 重複のないダミー選択肢を複数作成
+        function makeUnique(correctText, dummyGenerator, count = 3) {
+            let options = new Set();
+            let attempts = 0;
+            while(options.size < count && attempts < 50) {
+                let d = dummyGenerator(correctText);
+                let puncMatch = d.match(/([.?!]+)$/);
+                let punc = puncMatch ? puncMatch[1] : '';
+                let textWithoutPunc = punc ? d.slice(0, -punc.length) : d;
+
+                if (options.has(d) || d === correctText) {
+                    const variations = [' simply', ' completely', ' exactly', ' really'];
+                    const vary = variations[Math.floor(Math.random() * variations.length)];
+                    d = textWithoutPunc + vary + punc;
+                }
+                
+                if (/^[A-Z]/.test(correctText)) {
+                    d = d.charAt(0).toUpperCase() + d.slice(1);
+                }
+                if (d !== correctText) options.add(d);
+                attempts++;
+            }
+            
+            while(options.size < count) {
+                let puncMatch = correctText.match(/([.?!]+)$/);
+                let punc = puncMatch ? puncMatch[1] : '';
+                let textWithoutPunc = punc ? correctText.slice(0, -punc.length) : correctText;
+                let d = textWithoutPunc + [" exactly", " perfectly", " simply", " quickly"][options.size % 4] + punc;
+                if (/^[A-Z]/.test(correctText)) d = d.charAt(0).toUpperCase() + d.slice(1);
+                options.add(d);
+            }
+            return Array.from(options);
+        }
+
+        function shuffleArray(array) {
+            const newArr = [...array];
+            for (let i = newArr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+            }
+            return newArr;
+        }
+
+        // ================= 問題形式の自動変換処理 =================
+        function transformToMultipleChoice() {
+            let cardIdCounter = 0;
+            allFlashcards.forEach(card => {
+                card.id = cardIdCounter++;
+                let fText = card.front;
+                let bText = card.back;
+                
+                // 答えをクリーンにする（裏面表示用と正解文字列用）
+                let cleanAns = cleanAnswer(bText);
+                
+                // 1. 用法を答える問題 (3択)
+                if (fText.includes('用法を答え')) {
+                    card.category = "用法問題";
+                    card.options = ["名詞的用法", "形容詞的用法", "副詞的用法"];
+                    card.correctOption = card.options.find(opt => cleanAns.includes(opt)) || "名詞的用法";
+                    card.front = fText + "\n\n<div class='mt-4 flex flex-col gap-2 option-buttons'></div>";
+                    card.back = cleanAns;
+                    return;
+                }
+
+                // 2. 書き換えの正誤問題 (英文4択に)
+                if (fText.includes('下の文が正しければ○')) {
+                    const parts = fText.split('\n');
+                    let originalSentence = parts[1] || "";
+                    if (originalSentence.includes('/')) originalSentence = originalSentence.split('/')[0].trim();
+                    
+                    card.category = "書き換え問題";
+                    card.front = "【書き換え】次の文をほぼ同じ意味になるように書き換えたものを選びなさい。\n" + originalSentence + "\n\n<div class='mt-4 flex flex-col gap-2 option-buttons'></div>";
+                    
+                    let correctOption = cleanAns;
+                    if (bText.includes('○')) correctOption = parts[1].split('/')[1].trim(); 
+                    else if (fText.includes('They cannot put up with')) correctOption = "His bad attitude cannot be put up with by them.";
+                    else if (fText.includes('The big dog')) correctOption = "The children were frightened of the big dog.";
+                    else if (fText.includes('They called the old man')) correctOption = "An ambulance was called for the old man.";
+
+                    card.correctOption = correctOption;
+                    card.options = shuffleArray([correctOption, ...makeUnique(correctOption, generateDummySentence, 3)]);
+                    card.back = correctOption;
+                    return;
+                }
+
+                // 3. 誤り訂正問題 (該当箇所のみ4択に)
+                if (fText.includes('下線部に誤りがあるものを選び')) {
+                    card.category = "誤り訂正問題";
+                    card.front = fText.replace(/下線部に誤りがあるものを選び、訂正しなさい。?/g, '下線部を最適に直した選択肢を選びなさい。') + "\n\n<div class='mt-4 flex flex-col gap-2 option-buttons'></div>";
+                    let correctOpt = bText.split('※')[0].trim();
+                    card.correctOption = correctOpt;
+                    
+                    let parts = correctOpt.split('→');
+                    if (parts.length === 2) {
+                        let left = parts[0].trim();
+                        let right = parts[1].trim();
+                        let dummies = generateDummyForCorrection(left, right);
+                        
+                        card.options = [correctOpt];
+                        for(let i=0; i<3; i++) {
+                            if(dummies[i]) card.options.push(left + " → " + dummies[i]);
+                            else card.options.push(left + " → " + right + "s");
+                        }
+                    } else {
+                        card.options = [correctOpt, "そのまま残す", "toを補う", "ing形にする"];
+                    }
+                    card.options = shuffleArray(card.options);
+                    card.back = correctOpt;
+                    return;
+                }
+
+                // 4. 穴埋め問題 (カッコや___を検出し、( )に入る語句だけを4択にする)
+                let hasBlank = (fText.includes('(') && fText.includes(')')) || fText.includes('___') || fText.includes('_{2,}');
+                fText = fText.replace(/\[.*?\]/g, ''); // 選択ヒント削除
+                fText = fText.replace(/（/g, '(').replace(/）/g, ')'); // 全角カッコを半角に
+
+                if (hasBlank && !card.category.includes("並べかえ") && !fText.includes("並べかえ") && !fText.includes("並び変え") && !fText.includes("並べかえて")) {
+                    card.category = "穴埋め問題";
+                    fText = fText.replace(/適切なほうを選びなさい。?/g, '最も適する語を選びなさい。');
+                    fText = fText.replace(/入れなさい。?/g, '選びなさい。');
+                    fText = fText.replace(/完成させなさい。?/g, '完成させる語句を選びなさい。');
+                    
+                    let qLines = fText.split('\n');
+                    let questionEng = qLines[qLines.length - 1]; // 最後の行が英文
+                    
+                    // 英語部分のカッコを統合する
+                    let formattedEng = questionEng;
+                    formattedEng = formattedEng.replace(/_{2,}/g, '()');
+                    formattedEng = formattedEng.replace(/\([a-zA-Z\s/']+\)/g, '()'); 
+                    formattedEng = formattedEng.replace(/\(\s*\)/g, '()');
+                    
+                    // 間に単語が挟まっている複数のカッコを完全に1つに統合 (例: () to () -> ())
+                    while (formattedEng.match(/\(\)\s*[a-zA-Z,']+\s*\(\)/)) {
+                        formattedEng = formattedEng.replace(/\(\)\s*[a-zA-Z,']+\s*\(\)/g, '()');
+                    }
+                    // 連続する空カッコ ()() を1つにまとめる
+                    formattedEng = formattedEng.replace(/(?:\(\)\s*)+/g, '()');
+
+                    // () に入るべき正解フレーズを抽出
+                    let correctOpt = extractBlankWords(formattedEng, cleanAns);
+                    if (!correctOpt) correctOpt = cleanAns; // 抽出失敗時は全文を答えにする
+
+                    // 質問文の表示を更新
+                    qLines[qLines.length - 1] = formattedEng.replace(/\(\)/g, '(        )');
+                    let newFrontText = qLines.join('\n');
+
+                    card.correctOption = correctOpt;
+                    card.options = shuffleArray([correctOpt, ...makeUnique(correctOpt, generateDummyWords, 3)]);
+                    
+                    card.front = newFrontText + "\n\n<div class='mt-4 flex flex-col gap-2 option-buttons'></div>";
+                    card.back = cleanAns;
+                    return;
+                }
+
+                // 5. その他の全文4択問題（和訳・例文・英作など。※並べかえ以外）
+                if (!card.category.includes("並べかえ") && !fText.includes("並べかえ") && !fText.includes("並び変え") && !fText.includes("並べかえて")) {
+                    card.category = "4択問題";
+                    let promptText = fText;
+                    
+                    if (promptText.includes('日本語に直しなさい')) {
+                        let qLines = promptText.split('\n');
+                        let engSentence = (qLines.length > 1) ? qLines[1].trim() : cleanAns;
+                        promptText = "次の日本語と同じ意味の英文を選びなさい。\n" + bText.split('※')[0].trim();
+                        cleanAns = engSentence;
+                    } else if (promptText.includes('【例文】') || card.category === "例文") {
+                        promptText = "次の日本語と同じ意味になる英文を選びなさい。\n" + promptText.replace(/【例文】/g, '').trim();
+                    } else if (!promptText.includes('\n')) {
+                        promptText = "次の日本語と同じ意味の英文を選びなさい。\n" + promptText;
+                    }
+                    
+                    card.front = promptText + "\n\n<div class='mt-4 flex flex-col gap-2 option-buttons'></div>";
+                    card.correctOption = cleanAns;
+                    card.options = shuffleArray([cleanAns, ...makeUnique(cleanAns, generateDummySentence, 3)]);
+                    card.back = cleanAns;
+                    return;
+                }
+
+                // 6. 並べかえ問題などは変換不要でそのまま
+                card.front = fText;
+                card.back = cleanAns;
+            });
+        }
+        transformToMultipleChoice();
+
+        // ================= メニューの定義 =================
+        let reviewIds = JSON.parse(localStorage.getItem('grammar_review_ids') || '[]');
+
+        const menuItems = [
+            { id: "review", title: "Review", subtitle: "できなかった問題", icon: "fa-star", color: "amber" },
+            { id: "11", title: "Lesson 11", subtitle: "受動態①", icon: "fa-1", color: "blue" },
+            { id: "12", title: "Lesson 12", subtitle: "受動態②", icon: "fa-2", color: "indigo" },
+            { id: "13", title: "Lesson 13", subtitle: "不定詞①", icon: "fa-3", color: "emerald" },
+            { id: "14", title: "Lesson 14", subtitle: "不定詞②", icon: "fa-4", color: "teal" },
+            { id: "15", title: "Lesson 15", subtitle: "不定詞③", icon: "fa-5", color: "orange" },
+            { id: "16", title: "Lesson 16", subtitle: "不定詞④", icon: "fa-6", color: "rose" },
+            { id: "11_16_all", title: "Lesson 11-16 総合", subtitle: "受動態・不定詞 全範囲", icon: "fa-layer-group", color: "slate" },
+            { id: "workbook", title: "Workbook", subtitle: "例文・練習問題", icon: "fa-book", color: "cyan" },
+            { id: "2_5", title: "Insight", subtitle: "2章・5章", icon: "fa-book-open", color: "purple" },
+            { id: "all", title: "完全網羅 (全問)", subtitle: "全問題 シャッフル", icon: "fa-globe", color: "rose" }
+        ];
+
+        let currentFlashcards = [];
+        let currentIndex = 0;
+        let isFlipped = false;
+        let isAnimating = false;
+        let currentLessonId = null;
+
+        const homeView = document.getElementById('home-view');
+        const studyView = document.getElementById('study-view');
+        const lessonGrid = document.getElementById('lesson-grid');
+        const studyTitle = document.getElementById('study-title');
+        const backBtn = document.getElementById('back-btn');
+        const shuffleBtn = document.getElementById('shuffle-btn');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const cardContainer = document.getElementById('card-container');
+        const cardInner = document.getElementById('card-inner');
+        const frontCategory = document.getElementById('front-category');
+        const frontText = document.getElementById('front-text');
+        const backText = document.getElementById('back-text');
+        const hintContainer = document.getElementById('hint-container');
+        const hintText = document.getElementById('hint-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const starBtn = document.getElementById('star-btn');
+
+        function initHome() {
+            lessonGrid.innerHTML = '';
+            menuItems.forEach((menu, index) => {
+                let count = 0;
+                if (menu.id === "review") count = reviewIds.length;
+                else if (menu.id === "all") count = allFlashcards.length;
+                else if (menu.id === "11_16_all") count = allFlashcards.filter(c => ["11","12","13","14","15","16"].includes(c.lesson)).length;
+                else count = allFlashcards.filter(c => c.lesson === menu.id).length;
+
+                const borderColors = { "purple": "border-purple-500", "blue": "border-blue-500", "indigo": "border-indigo-500", "emerald": "border-emerald-500", "teal": "border-teal-500", "amber": "border-amber-500", "orange": "border-orange-500", "slate": "border-slate-700", "rose": "border-rose-500", "cyan": "border-cyan-500" };
+                const textColors = { "purple": "text-purple-600", "blue": "text-blue-600", "indigo": "text-indigo-600", "emerald": "text-emerald-600", "teal": "text-teal-600", "amber": "text-amber-600", "orange": "text-orange-600", "slate": "text-slate-700", "rose": "text-rose-600", "cyan": "text-cyan-600" };
+                const bgColors = { "purple": "bg-purple-50", "blue": "bg-blue-50", "indigo": "bg-indigo-50", "emerald": "bg-emerald-50", "teal": "bg-teal-50", "amber": "bg-amber-50", "orange": "bg-orange-50", "slate": "bg-slate-100", "rose": "bg-rose-50", "cyan": "bg-cyan-50" };
+
+                const btn = document.createElement('button');
+                btn.className = `bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all transform hover:-translate-y-1 flex flex-col items-start border-t-4 ${borderColors[menu.color]} w-full text-left group`;
+                btn.style.animationDelay = `${index * 0.05}s`;
+                btn.classList.add('animate-fade-in');
+                
+                if (menu.id === "review" && count === 0) {
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    btn.disabled = true;
+                } else {
+                    btn.onclick = () => startLesson(menu.id, menu.title);
+                }
+                
+                btn.innerHTML = `
+                    <div class="flex justify-between items-center w-full mb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid ${menu.icon} ${textColors[menu.color]} text-lg opacity-70"></i>
+                            <span class="${textColors[menu.color]} font-bold text-sm tracking-wider">${menu.title}</span>
+                        </div>
+                        <div class="h-8 w-8 rounded-full ${bgColors[menu.color]} ${textColors[menu.color]} flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-play text-xs pl-0.5"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-6">${menu.subtitle}</h2>
+                    <div class="mt-auto">
+                        <span class="text-xs sm:text-sm text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full font-medium border border-slate-100">
+                            <i class="fa-solid fa-layer-group mr-1"></i> ${count} Cards
+                        </span>
+                    </div>
+                `;
+                lessonGrid.appendChild(btn);
+            });
+        }
+
+        function startLesson(id, title) {
+            currentLessonId = id;
+            studyTitle.textContent = title;
+            
+            if (id === "review") currentFlashcards = allFlashcards.filter(c => reviewIds.includes(c.id));
+            else if (id === "all") currentFlashcards = [...allFlashcards];
+            else if (id === "11_16_all") currentFlashcards = allFlashcards.filter(c => ["11","12","13","14","15","16"].includes(c.lesson));
+            else currentFlashcards = allFlashcards.filter(c => c.lesson === id);
+            
+            if (["all", "11_16_all", "review"].includes(id)) {
+                currentFlashcards = shuffleArray(currentFlashcards);
+                shuffleBtn.classList.add('text-indigo-600', 'bg-indigo-100');
+            } else {
+                shuffleBtn.classList.remove('text-indigo-600', 'bg-indigo-100');
+            }
+
+            currentIndex = 0;
+            isFlipped = false;
+            
+            homeView.classList.add('hidden');
+            studyView.classList.remove('hidden');
+            
+            renderCard();
+        }
+
+        function renderCard() {
+            if (currentFlashcards.length === 0) return;
+            const card = currentFlashcards[currentIndex];
+            
+            let badgeClass = "badge-default";
+            if (card.category.includes("和訳")) badgeClass = "badge-wa";
+            else if (card.category.includes("穴埋め")) badgeClass = "badge-ana";
+            else if (card.category.includes("並べかえ")) badgeClass = "badge-nara";
+            else if (card.category.includes("誤り")) badgeClass = "badge-kaki";
+            else if (card.options) badgeClass = "badge-4taku";
+            
+            frontCategory.textContent = card.category;
+            frontCategory.className = `category-badge ${badgeClass} w-max mb-0`;
+            
+            frontText.innerHTML = card.front.replace(/\n/g, '<br>');
+            backText.innerHTML = card.back.replace(/\n/g, '<br>');
+
+            if (card.options) {
+                const optionContainer = document.querySelector('.option-buttons');
+                if (optionContainer) {
+                    optionContainer.innerHTML = '';
+                    card.options.forEach((opt, idx) => {
+                        const btn = document.createElement('button');
+                        btn.className = "w-full text-left p-3 border rounded-xl hover:bg-indigo-50 transition-colors text-slate-700 font-medium text-sm sm:text-base mb-2 flex items-start bg-slate-50";
+                        btn.innerHTML = `<span class="inline-block w-6 font-bold text-indigo-400 flex-shrink-0">${idx+1}.</span> <span class="break-words">${opt}</span>`;
+                        btn.onclick = (e) => {
+                            e.stopPropagation();
+                            flipCard();
+                        };
+                        optionContainer.appendChild(btn);
+                    });
+                }
+            }
+
+            if (card.hint && card.hint.trim() !== "") {
+                hintContainer.classList.remove('hidden');
+                hintText.textContent = card.hint;
+            } else {
+                hintContainer.classList.add('hidden');
+            }
+
+            progressText.textContent = `Card ${currentIndex + 1} of ${currentFlashcards.length}`;
+            progressBar.style.width = `${((currentIndex + 1) / currentFlashcards.length) * 100}%`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === currentFlashcards.length - 1;
+
+            updateStarBtn(card.id);
+        }
+
+        function flipCard() {
+            if (isAnimating) return;
+            isFlipped = !isFlipped;
+            if (isFlipped) cardInner.classList.add('rotate-y-180');
+            else cardInner.classList.remove('rotate-y-180');
+        }
+
+        function changeCard(newIndex) {
+            if (newIndex < 0 || newIndex >= currentFlashcards.length || isAnimating) return;
+            isAnimating = true;
+            if (isFlipped) {
+                isFlipped = false;
+                cardInner.classList.remove('rotate-y-180');
+                setTimeout(() => {
+                    currentIndex = newIndex;
+                    renderCard();
+                    isAnimating = false;
+                }, 300);
+            } else {
+                currentIndex = newIndex;
+                renderCard();
+                isAnimating = false;
+            }
+        }
+
+        // ================= TTS 読み上げ機能 =================
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            
+            let engText = text.replace(/[ぁ-んァ-ヶ亜-熙]/g, '')
+                              .replace(/【.*?】/g, '')
+                              .replace(/①|②|③|④/g, '')
+                              .replace(/1\.|2\.|3\.|4\./g, '')
+                              .replace(/\( {2,}\)/g, ' blank ') // 空白カッコをblankと読む
+                              .replace(/<[^>]*>?/gm, '')
+                              .trim();
+            if (!engText) return;
+            
+            const ut = new SpeechSynthesisUtterance(engText);
+            ut.lang = 'en-US';
+            window.speechSynthesis.speak(ut);
+        }
+
+        document.getElementById('speak-front').addEventListener('click', (e) => {
+            e.stopPropagation();
+            let textToRead = currentFlashcards[currentIndex].front;
+            if (currentFlashcards[currentIndex].options) {
+                textToRead += " " + currentFlashcards[currentIndex].options.join(". ");
+            }
+            speakText(textToRead);
+        });
+
+        document.getElementById('speak-back').addEventListener('click', (e) => {
+            e.stopPropagation();
+            speakText(currentFlashcards[currentIndex].back);
+        });
+
+        // ================= 苦手問題(★)登録機能 =================
+        function updateStarBtn(id) {
+            if (reviewIds.includes(id)) {
+                starBtn.classList.replace('bg-slate-100', 'bg-yellow-400');
+                starBtn.classList.replace('text-slate-500', 'text-white');
+                starBtn.innerHTML = `<i class="fa-solid fa-star"></i> <span>苦手はずす</span>`;
+            } else {
+                starBtn.classList.replace('bg-yellow-400', 'bg-slate-100');
+                starBtn.classList.replace('text-white', 'text-slate-500');
+                starBtn.innerHTML = `<i class="fa-regular fa-star"></i> <span>苦手登録</span>`;
+            }
+        }
+
+        starBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = currentFlashcards[currentIndex].id;
+            if (reviewIds.includes(id)) {
+                reviewIds = reviewIds.filter(revId => revId !== id);
+            } else {
+                reviewIds.push(id);
+            }
+            localStorage.setItem('grammar_review_ids', JSON.stringify(reviewIds));
+            updateStarBtn(id);
+        });
+
+        // ================= イベントリスナー =================
+        cardContainer.addEventListener('click', flipCard);
+        prevBtn.addEventListener('click', () => changeCard(currentIndex - 1));
+        nextBtn.addEventListener('click', () => changeCard(currentIndex + 1));
+
+        backBtn.addEventListener('click', () => {
+            studyView.classList.add('hidden');
+            homeView.classList.remove('hidden');
+            window.speechSynthesis.cancel();
+            initHome();
+        });
+
+        shuffleBtn.addEventListener('click', () => {
+            if (shuffleBtn.classList.contains('text-indigo-600')) {
+                shuffleBtn.classList.remove('text-indigo-600', 'bg-indigo-100');
+                if (currentLessonId === "review") currentFlashcards = allFlashcards.filter(c => reviewIds.includes(c.id));
+                else if (currentLessonId === "all") currentFlashcards = [...allFlashcards];
+                else if (currentLessonId === "11_16_all") currentFlashcards = allFlashcards.filter(c => ["11","12","13","14","15","16"].includes(c.lesson));
+                else currentFlashcards = allFlashcards.filter(c => c.lesson === currentLessonId);
+            } else {
+                shuffleBtn.classList.add('text-indigo-600', 'bg-indigo-100');
+                currentFlashcards = shuffleArray(currentFlashcards);
+            }
+            changeCard(0);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if(studyView.classList.contains('hidden')) return;
+            if (e.key === 'ArrowRight') changeCard(currentIndex + 1);
+            else if (e.key === 'ArrowLeft') changeCard(currentIndex - 1);
+            else if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.preventDefault(); 
+                flipCard();
+            } else if (e.key === 'Escape') backBtn.click();
+        });
+
+        let touchStartX = 0, touchEndX = 0;
+        cardContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        cardContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) changeCard(currentIndex + 1);
+            if (touchEndX > touchStartX + 50) changeCard(currentIndex - 1);
+        }, { passive: true });
+
+        // アプリ起動
+        initHome();
+    </script>
+</body>
+</html>
