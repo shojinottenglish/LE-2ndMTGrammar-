@@ -76,7 +76,7 @@
                     <i class="fa-solid fa-layer-group text-3xl"></i>
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mb-4">英語文法 総合マスター</h1>
-                <p class="text-slate-500 text-lg mb-2">Lesson 11-16 / Workbook / Insight 完全網羅版</p>
+                <p class="text-slate-500 text-lg mb-2">Workbook / 本冊 / Insight 完全網羅版</p>
                 <p class="text-slate-400 text-sm">学習したい単元を選択してください</p>
             </div>
 
@@ -260,8 +260,8 @@
             { no: "138", ja: "母国語の英語はもちろんのこと、ナオミはフランス語も流ちょうに話す。", q: "Naomi speaks French fluently, (t)(s)(n)(o) her native English.", a: "Naomi speaks French fluently, to say nothing of her native English." }
         ];
 
-        // ================= Lesson 11〜16 データ =================
-        const lesson11to16Data = [
+        // ================= Lesson 11〜14 データ =================
+        const lesson11to14Data = [
             { front: "【Lesson 11 - 1-1】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n昨日そのケーキは小さな女の子に買われた。\nThe cake ( ) by a little girl yesterday. [buy]", back: "The cake (was bought) by a little girl yesterday.", hint: "Lesson 11: 受動態①" },
             { front: "【Lesson 11 - 1-2】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\n私のお気に入りのシャツは洗濯中だ。\nMy favorite shirt ( ) now. [wash]", back: "My favorite shirt (is being washed) now.", hint: "Lesson 11: 受動態①" },
             { front: "【Lesson 11 - 1-3】日本語に合うように、[ ]内の動詞を使って英文を完成させなさい。\nパンがちょうど焼き上がったところだ。\nThe bread ( ). [bake]", back: "The bread (has just been baked).", hint: "Lesson 11: 受動態①" },
@@ -353,11 +353,119 @@
             { front: "【Lesson 13 - CHALLENGE! 2】次の日本語を英語に直しなさい。ただし、不定詞を使うこと。\n私にはそのDVDを見ている時間がありません。", back: "I have no time to watch the DVD. / I don't have time to watch the DVD.", hint: "Lesson 13: 不定詞①" },
             { front: "【Lesson 13 - CHALLENGE! 3】次の日本語を英語に直しなさい。ただし、不定詞を使うこと。\n彼女は真実を知って残念に思った。", back: "She was sorry to know the truth.", hint: "Lesson 13: 不定詞①" },
             { front: "【Lesson 13 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nThe boy has a lot of friends to [play].", back: "play → play with", hint: "Lesson 13: 不定詞①" },
-            { front: "【Lesson 14 - 1-1】( )内から適切なほうを選びなさい。\nI wasn't told when to (begin / be begun) the meeting.", back: "begin", hint: "Lesson 15: 不定詞③" },
-            { front: "【Lesson 14 - 1-2】( )内から適切なほうを選びなさい。\nThe charm seems to (have come / come) off the keychain again.", back: "have come", hint: "Lesson 15: 不定詞③" },
-            { front: "【Lesson 14 - 1-3】( )内から適切なほうを選びなさい。\nThe report needs to (have submitted / be submitted) by Monday.", back: "be submitted", hint: "Lesson 15: 不定詞③" },
-            { front: "【Lesson 14 - 1-4】( )内から適切なほうを選びなさい。\nThe kind man showed me (what / how) to get to the station.", back: "how", hint: "Lesson 15: 不定詞③" },
-            { front: "【Lesson 14 - 1-5】( )内から適切なほうを選びなさい。\nJames seems to (have had / be having) a good time with his family now.", back: "be having", hint: "Lesson 15: 不定詞③" }
+            { front: "【Lesson 14 - 1-1】( )内から適切なほうを選びなさい。\nIt is natural ( ) to love their children. (parents)", back: "It is natural (for parents) to love their children.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 1-2】( )内から適切なほうを選びなさい。\nThey persuaded ( ) to be captain of their team. (he)", back: "They persuaded (him) to be captain of their team.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 1-3】( )内から適切なほうを選びなさい。\nIt was careless ( ) to make such a mistake. (you)", back: "It was careless (of you) to make such a mistake.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 1-4】( )内から適切なほうを選びなさい。\nIt is good ( ) not to spend too much money during your travel. (you)", back: "It is good (for you) not to spend too much money during your travel.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 1-5】( )内から適切なほうを選びなさい。\nHer father let ( ) live in Paris. (she)", back: "Her father let (her) live in Paris.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 1-6】( )内から適切なほうを選びなさい。\nI heard ( ) call my name. (my mother)", back: "I heard (my mother) call my name.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-1】日本語に合うように、( )に適切な語を入れなさい。\n私は彼らにうるさくしないように言った。\nI told ( )( )( ) be noisy.", back: "I told (them)(not)(to) be noisy.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-2】日本語に合うように、( )に適切な語を入れなさい。\nハリーはその女性が銀行に入るのを見た。\nHarry ( ) the woman ( ) the bank.", back: "Harry (saw) the woman (enter) the bank.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-3】日本語に合うように、( )に適切な語を入れなさい。\n彼女がその封筒を開けなかったのは賢明だった。\nIt was sensible ( )( )( )( ) open the envelope.", back: "It was sensible (of)(her)(not)(to) open the envelope.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-4】日本語に合うように、( )に適切な語を入れなさい。\n私はこれ以上遅刻はしないと決意した。\nI decided ( )( )( ) late anymore.", back: "I decided (not)(to)(be) late anymore.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-5】日本語に合うように、( )に適切な語を入れなさい。\nその問題に立ち向かうとは、彼は勇敢だった。\nIt was brave ( )( )( ) face the problem.", back: "It was brave (of)(him)(to) face the problem.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-6】日本語に合うように、( )に適切な語を入れなさい。\n私は誰かが門を閉めるのに気付いた。\nI noticed ( )( ) the gate.", back: "I noticed (someone)(close) the gate.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-7】日本語に合うように、( )に適切な語を入れなさい。\n父は私が彼の事業を引き継ぐように勧めた。\nMy father encouraged ( )( ) take over his business.", back: "My father encouraged (me)(to) take over his business.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-8】日本語に合うように、( )に適切な語を入れなさい。\nシンディーが一日でその仕事を仕上げるのは困難だ。\nIt's difficult ( ) Cindy ( ) finish the work in a day.", back: "It's difficult (for) Cindy (to) finish the work in a day.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 2-9】日本語に合うように、( )に適切な語を入れなさい。\n私たちの旅行の計画について私に説明させてください。\nLet ( )( ) the plan for our trip.", back: "Let (me)(explain) the plan for our trip.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 3-1】各組の文がほぼ同じ意味になるように、( ) に適切な語を入れなさい。\nYou were very nice to lend me your cell phone. = It was very nice ( )( ) to lend me your cell phone.", back: "(of)(you)", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 3-2】各組の文がほぼ同じ意味になるように、( ) に適切な語を入れなさい。\nMy father allowed me to join the summer camp. = My father ( )( ) join the summer camp.", back: "(let)(me)", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 3-3】各組の文がほぼ同じ意味になるように、( ) に適切な語を入れなさい。\nSeveral bees were seen hunt the honey. = We ( ) several ( ) hunt the honey.", back: "(saw) several (bees)", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 4-1】( )内の語句を並べかえて、英文を完成させなさい。\n(ordered / go / my boss / to / me / to / Osaka).", back: "My boss ordered me to go to Osaka.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 4-2】( )内の語句を並べかえて、英文を完成させなさい。\n(give / of / nice / the villagers / it / to / was) the man food and a house.", back: "It was nice of the villagers to give the man food and a house.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 4-3】( )内の語句を並べかえて、英文を完成させなさい。\nAmy (its / make / nest / bird / watched / the).", back: "Amy watched the bird make its nest.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 4-4】( )内の語句を並べかえて、英文を完成させなさい。\nI (my / bad tooth / had / pull out / the / dentist).", back: "I had the dentist pull out my bad tooth.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 5-1】次の英文を日本語に直しなさい。\nTake care not to wake the baby.", back: "赤ちゃんを起こさないように注意しなさい。", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 5-2】次の英文を日本語に直しなさい。\nI want you to pick me up at Haneda Airport.", back: "私はあなたに羽田空港へ私を車で迎えに来てほしい。", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 5-3】次の英文を日本語に直しなさい。\nShe listened to him play the piano.", back: "彼女は彼がピアノを弾くのを聴いた。", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - 5-4】次の英文を日本語に直しなさい。\nIt is very dangerous for kids to follow a stranger.", back: "子どもたちが知らない人についていくことはとても危険だ。", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - CHALLENGE! 1】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\n親切にも彼女は私の宿題を手伝ってくれた。\nIt", back: "It was kind of her to help me with my homework.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - CHALLENGE! 2】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\n彼が助けてくれたおかげで私は試験に合格できた。\nHis help", back: "His help enabled me to pass the exam. (allowedも可)", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - CHALLENGE! 3】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\n私たちがお互いに信頼しあうことは大切だ。(trust)\nIt", back: "It is important for us to trust each other.", hint: "Lesson 14: 不定詞②" },
+            { front: "【Lesson 14 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nMy brother was made [go] there alone.", back: "go → to go", hint: "Lesson 14: 不定詞②" }
+        ];
+
+        // ================= Lesson 15〜16 データ =================
+        const lesson15to16Data = [
+            // Lesson 15
+            { front: "【Lesson 15 - 1-1】( )内から適切なほうを選びなさい。\nI wasn't told when to ( begin / be begun ) the meeting.", back: "begin", hint: "Lesson 15: 不定詞③ (疑問詞+to do)" },
+            { front: "【Lesson 15 - 1-2】( )内から適切なほうを選びなさい。\nThe charm seems to ( have come / come ) off the keychain again.", back: "have come", hint: "Lesson 15: 不定詞③ (完了不定詞)" },
+            { front: "【Lesson 15 - 1-3】( )内から適切なほうを選びなさい。\nThe report needs to ( have submitted / be submitted ) by Monday.", back: "be submitted", hint: "Lesson 15: 不定詞③ (受動態の不定詞)" },
+            { front: "【Lesson 15 - 1-4】( )内から適切なほうを選びなさい。\nThe kind man showed me ( what / how ) to get to the station.", back: "how", hint: "Lesson 15: 不定詞③ (how to do: ～のしかた)" },
+            { front: "【Lesson 15 - 1-5】( )内から適切なほうを選びなさい。\nJames seems to ( have had / be having ) a good time with his family now.", back: "be having", hint: "Lesson 15: 不定詞③ (進行形の不定詞)" },
+            
+            { front: "【Lesson 15 - 2-1】日本語に合うように、( )に適切な語を入れなさい。\nどちらのバスに乗ったらよいかわかりますか。\nDo you know (  ) (  ) (  ) take?", back: "(which)(bus)(to)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-2】日本語に合うように、( )に適切な語を入れなさい。\n彼女は困っているようだ。\nShe (  ) (  ) (  ) in trouble.", back: "(seems)(to)(be)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-3】日本語に合うように、( )に適切な語を入れなさい。\n彼らはここまで走ってきたようだ。\nThey appear (  ) (  ) (  ) here.", back: "(to)(have)(run)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-4】日本語に合うように、( )に適切な語を入れなさい。\n私たちは誰を主役に選んだらよいかについて話し合った。\nWe talked about (  ) (  ) choose as a leading part.", back: "(who)(to)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-5】日本語に合うように、( )に適切な語を入れなさい。\n誰の提案を採用したらよいだろうか。\nI'm wondering (  ) suggestion (  ) adopt.", back: "(whose)(to)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-6】日本語に合うように、( )に適切な語を入れなさい。\nどこで昼食を食べたらよいか教えてください。\nPlease tell me (  ) (  ) (  ) lunch.", back: "(where)(to)(have)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-7】日本語に合うように、( )に適切な語を入れなさい。\n彼は彼女に紹介されてうれしかった。\nHe was happy (  ) (  ) introduced to her.", back: "(to)(be)", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 2-8】日本語に合うように、( )に適切な語を入れなさい。\nドロシーは昨夜からずっと働き続けていたようだ。\nDorothy seems to (  ) (  ) working since last night.", back: "(have)(been)", hint: "Lesson 15: 不定詞③" },
+
+            { front: "【Lesson 15 - 3-1】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nMike seemed to know the answer to the question.\nIt seemed __________________.", back: "It seemed (that Mike knew the answer to the question).", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 3-2】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nThe textbook is said to be the best for learners of French.\nIt is said __________________.", back: "It is said (that the textbook is the best for learners of French).", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 3-3】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nWe believe that he was innocent of the crime.\nHe is believed __________________.", back: "He is believed (to have been innocent of the crime).", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 3-4】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nI was at a loss what I should buy for her birthday.\nI was at a loss what __________________.", back: "I was at a loss what (to buy for her birthday).", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 3-5】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nI can't make a paper crane.\nI don't know how __________________.", back: "I don't know how (to make a paper crane).", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 3-6】各組の文がほぼ同じ意味になるように、下線部に適切な語句を補いなさい。\nKevin wanted her to love him.\nKevin wanted to __________________ her.", back: "Kevin wanted to (be loved by) her.", hint: "Lesson 15: 不定詞③" },
+
+            { front: "【Lesson 15 - 4-1】( )内の語句を並べかえて、英文を完成させなさい。\nI didn't know ( order / to / at / the / what / restaurant ).", back: "I didn't know what to order at the restaurant.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-2】( )内の語句を並べかえて、英文を完成させなさい。\nHe pretended ( seen / to / me / not / have / before ).", back: "He pretended not to have seen me before.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-3】( )内の語句を並べかえて、英文を完成させなさい。\nShe is said ( have / to / in / India / born / been ).", back: "She is said to have been born in India.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-4】( )内の語句を並べかえて、英文を完成させなさい。\nHow lucky ( are / you / appreciated / that critic / be / by / to )!", back: "How lucky you are to be appreciated by that critic!", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-5】( )内の語句を並べかえて、英文を完成させなさい。\nShe seems ( of / the criminal / the incident / known / to / have ).", back: "She seems to have known of the incident.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-6】( )内の語句を並べかえて、英文を完成させなさい。\nHe was shocked ( father / have / his / mistaken / to / been / for ).", back: "He was shocked to have been mistaken for his father.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 4-7】( )内の語句を並べかえて、英文を完成させなさい。\nLucy told ( where / a / to / me / tent / set up ).", back: "Lucy told me where to set up a tent.", hint: "Lesson 15: 不定詞③" },
+
+            { front: "【Lesson 15 - 5-1】次の英文を日本語に直しなさい。\nTerry seemed to have been sick for a few days.", back: "テリーは数日間病気だったようだ。", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 5-2】次の英文を日本語に直しなさい。\nThis wall needs to be repainted.", back: "この壁は塗り直される必要がある。", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 5-3】次の英文を日本語に直しなさい。\nBen seems to have been elected as a new chief.", back: "ベンは新しいチーフに選ばれたようだ。", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 5-4】次の英文を日本語に直しなさい。\nShe can't understand how to use the machine.", back: "彼女はその機械の使い方を理解できない。", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - 5-5】次の英文を日本語に直しなさい。\nThe boy was happy to have been given many toys.", back: "その少年はたくさんのおもちゃをもらって嬉しかった。", hint: "Lesson 15: 不定詞③" },
+
+            { front: "【Lesson 15 - CHALLENGE! 1】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\n次に何をしたらよいかがわかりません。\nI", back: "I don't know what to do next.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - CHALLENGE! 2】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\nそのコンピューターは壊れているようだった。\nThe computer", back: "The computer seemed to be broken.", hint: "Lesson 15: 不定詞③" },
+            { front: "【Lesson 15 - CHALLENGE! 3】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。\nほとんどの日本人が勤勉であるようだ。(diligent)\nMost Japanese", back: "Most Japanese seem to be diligent.", hint: "Lesson 15: 不定詞③" },
+
+            { front: "【Lesson 15 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\nHe (a)explained (b)to me (c)[to play] (d)the guitar.", back: "to play → how to play", hint: "Lesson 15: 不定詞③" },
+
+            // Lesson 16
+            { front: "【Lesson 16 - 1-1】日本語に合うように、( )に適切な語を入れなさい。\n彼はいわば、現代のチャップリンだ。\nHe is, so (  ) (  ), the Chaplin of our time.", back: "(to)(speak)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-2】日本語に合うように、( )に適切な語を入れなさい。\nその少女は二度と故郷には戻らない運命にあった。\nThe girl (  ) never (  ) return to her hometown.", back: "(was)(to)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-3】日本語に合うように、( )に適切な語を入れなさい。\n彼女は来月、ジョンと結婚することになっている。\nShe (  ) (  ) get married to John next month.", back: "(is)(to)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-4】日本語に合うように、( )に適切な語を入れなさい。\nジャックは釣りに行くために朝早く出かけました。\nJack left early in the morning so (  ) (  ) go fishing.", back: "(as)(to)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-5】日本語に合うように、( )に適切な語を入れなさい。\nテネットという映画は理解するのがとても難しい。\nThe movie, TENET, is very hard (  ) (  ).", back: "(to)(understand)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-6】日本語に合うように、( )に適切な語を入れなさい。\n奇妙なことに、部屋は内側からカギがかけられていたのです。\n(  ) (  ) say, the room was locked on the inside.", back: "(Strange)(to)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-7】日本語に合うように、( )に適切な語を入れなさい。\n彼はそこへ一人で行くほど勇敢だ。\nHe is (  ) brave (  ) to go there alone.", back: "(so)(as) または He is brave (enough) to go", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-8】日本語に合うように、( )に適切な語を入れなさい。\n今日は風が強い。さらに悪いことに雨が降り始めた。\nIt's windy today. (  ) (  ) (  ) (  ), it began to rain.", back: "(To)(make)(matters)(worse)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 1-9】日本語に合うように、( )に適切な語を入れなさい。\n彼女はたまたまその時その部屋にいた。\nShe (  ) (  ) be in the room then.", back: "(happened)(to)", hint: "Lesson 16: 不定詞④" },
+
+            { front: "【Lesson 16 - 2-1】各組の文がほぼ同じ意味になるように、( )に適切な語を入れなさい。\nThe dogs were so powerful that they could pull the sleigh.\nThe dogs were powerful (  ) (  ) (  ) the sleigh.", back: "(enough)(to)(pull)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 2-2】各組の文がほぼ同じ意味になるように、( )に適切な語を入れなさい。\nThe house is very old. We cannot live in it.\nThe house is (  ) (  ) (  ) live in.", back: "(too)(old)(to)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 2-3】各組の文がほぼ同じ意味になるように、( )に適切な語を入れなさい。\nIt is convenient to take this small computer with me.\nThis small computer is (  ) (  ) (  ) with me.", back: "(easy)(to)(take) または (convenient)(to)(take)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 2-4】各組の文がほぼ同じ意味になるように、( )に適切な語を入れなさい。\nShe hurried to the station to get the first train.\nShe hurried to the station in (  ) (  ) (  ) the first train.", back: "(order)(to)(get)", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 2-5】各組の文がほぼ同じ意味になるように、( )に適切な語を入れなさい。\nI was too upset to explain my mistake.\nI was so (  ) that (  ) (  ) explain my mistake.", back: "(upset)(I)(couldn't)", hint: "Lesson 16: 不定詞④" },
+
+            { front: "【Lesson 16 - 3-1】( )内の語句を並べかえて、英文を完成させなさい。\nShe ( join / to / young / the / was / event / too ).", back: "She was too young to join the event.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 3-2】( )内の語句を並べかえて、英文を完成させなさい。\n( no / be / to / stars / were / seen ) in the sky.", back: "No stars were to be seen in the sky.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 3-3】( )内の語句を並べかえて、英文を完成させなさい。\nI studied hard ( exam / to / so / fail / as / the / not ).", back: "I studied hard so as not to fail the exam.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 3-4】( )内の語句を並べかえて、英文を完成させなさい。\nThomas ( child / was / to / generous / the / enough / forgive ).", back: "Thomas was generous enough to forgive the child.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 3-5】( )内の語句を並べかえて、英文を完成させなさい。\n( pen / to / with / easy / write / this / is ).", back: "This pen is easy to write with.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 3-6】( )内の語句を並べかえて、英文を完成させなさい。\nI ( wrote down / to /order / the number / not / forget / in ).", back: "I wrote down the number in order not to forget.", hint: "Lesson 16: 不定詞④" },
+
+            { front: "【Lesson 16 - 4-1】次の英文を日本語に直しなさい。\nThe station is too far to walk.", back: "その駅は歩くには遠すぎる。", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 4-2】次の英文を日本語に直しなさい。\nJapanese is tough for foreigners to master.", back: "日本語は外国人が習得するには難しい。", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 4-3】次の英文を日本語に直しなさい。\nThe students are to have lunch in this room.", back: "生徒たちはこの部屋で昼食をとることになっている。", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 4-4】次の英文を日本語に直しなさい。\nHe is not old enough to travel alone.", back: "彼は一人で旅行するほど十分に年をとっていない。（一人で旅行できる年齢ではない）", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 4-5】次の英文を日本語に直しなさい。\nTo tell the truth, he left the village, never to return.", back: "実を言うと、彼は村を去り、二度と戻らなかった。", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - 4-6】次の英文を日本語に直しなさい。\nI'd like to visit the temple, but I don't have free time to.", back: "そのお寺を訪れたいが、私にはそうするための自由な時間がない。", hint: "Lesson 16: 不定詞④ (代不定詞)" },
+
+            { front: "【Lesson 16 - CHALLENGE! 1】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。ただし、不定詞を使うこと。\n彼の話は信じがたい。\nHis story", back: "His story is hard to believe.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - CHALLENGE! 2】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。ただし、不定詞を使うこと。\n総理はその幼稚園を訪問することになっている。(kindergarten)\nThe Prime Minister", back: "The Prime Minister is to visit the kindergarten.", hint: "Lesson 16: 不定詞④" },
+            { front: "【Lesson 16 - CHALLENGE! 3】次の日本語をそれぞれの書き出しに続けて、英語に直しなさい。ただし、不定詞を使うこと。\n彼は話していて楽しい。(pleasant)\nHe is", back: "He is pleasant to talk with.", hint: "Lesson 16: 不定詞④" },
+
+            { front: "【Lesson 16 - ミスに注意!】下線部に誤りがあるものを選び、訂正しなさい。\n(a)Most (b)fish (c)are safe (d)[to eat them].", back: "to eat them → to eat", hint: "Lesson 16: 不定詞④" }
         ];
 
         // ================= Workbook 追加データ =================
@@ -370,8 +478,162 @@
             { f: "【例文】このレポートは明日までに終わらせなければならない。", b: "This essay must be finished by tomorrow.", h: "助動詞＋be＋過去分詞" },
             { f: "【例文】彼の新しい映画は5月に公開されるだろう。", b: "His new movie will be released in May.", h: "未来を表す受動態" },
             { f: "【例文】角に新しいビルが建てられているところだ。", b: "A new building is being built on the corner.", h: "進行形の受動態 (be being 過去分詞)" },
-            { f: "【例文】壁に触らないで。ちょうど塗られたばかりだ。", b: "Don't touch the wall. It has just been painted.", h: "現在完了の受動態 (have been 過去分詞)" }
+            { f: "【例文】壁に触らないで。ちょうど塗られたばかりだ。", b: "Don't touch the wall. It has just been painted.", h: "現在完了の受動態 (have been 過去分詞)" },
+            { f: "【書換】The famous actor wrote the novel. (受動態に)", b: "The novel was written by the famous actor.", h: "Lesson 11 Ex 1-1" },
+            { f: "【書換】They closed the airport because of noise pollution. (受動態に)", b: "The airport was closed because of noise pollution.", h: "Lesson 11 Ex 1-2 (Theyは省略)" },
+            { f: "【書換】The research team solved the problem after many meetings. (受動態に)", b: "The problem was solved by the research team after many meetings.", h: "Lesson 11 Ex 1-3" },
+            { f: "【書換】Eddie put the paintings on the walls of his house. (受動態に)", b: "The paintings were put by Eddie on the walls of his house.", h: "Lesson 11 Ex 1-4 (putの過去分詞はput)" },
+            { f: "【書換】The moon hid the sun this morning. (受動態に)", b: "The sun was hidden by the moon this morning.", h: "Lesson 11 Ex 1-5 (hidの過去分詞はhidden)" },
+            { f: "【書換】People make mistakes when they are careless. (受動態に)", b: "Mistakes are made when people are careless.", h: "Lesson 11 Ex 1-6 (Peopleは省略)" },
+            { f: "【書換】The professionals didn't repair these old pianos. (these old pianosを主語に)", b: "These old pianos were not repaired by the professionals.", h: "Lesson 11 Ex 2-1" },
+            { f: "【書換】Did the children feed the rabbits the day before yesterday? (the rabbitsを主語に)", b: "Were the rabbits fed by the children the day before yesterday?", h: "Lesson 11 Ex 2-2" },
+            { f: "【書換】The vase was broken by Ted. (by Tedが答えの中心となる疑問文に)", b: "Who was the vase broken by? (または By whom was the vase broken?)", h: "Lesson 11 Ex 2-3" },
+            { f: "【書換】Lisa was greeted by the host of the party. (by the host...が答えの中心となる疑問文に)", b: "Who was Lisa greeted by?", h: "Lesson 11 Ex 2-4" },
+            { f: "【書換】Her suggestion is accepted. (「〜され得ない」という意味の文に)", b: "Her suggestion cannot be accepted.", h: "Lesson 11 Ex 2-5 (助動詞 cannot)" },
+            { f: "【書換】We ought to obey the laws of the country. (the laws of the countryを主語に)", b: "The laws of the country ought to be obeyed.", h: "Lesson 11 Ex 2-6 (by us は通常省略)" },
+            { f: "【並べかえ】(has / the new museum / opened / just / been).", b: "The new museum has just been opened.", h: "Lesson 11 Ex 3-1" },
+            { f: "【並べかえ】(will / to / the patient / carried / be / a bigger hospital).", b: "The patient will be carried to a bigger hospital.", h: "Lesson 11 Ex 3-2" },
+            { f: "【並べかえ】By the time he arrived there, (had / taken / the last / been / seat).", b: "By the time he arrived there, the last seat had been taken.", h: "Lesson 11 Ex 3-3 (過去完了の受動態)" },
+            { f: "【並べかえ】(will / the song / by / be / a famous singer / sung).", b: "The song will be sung by a famous singer.", h: "Lesson 11 Ex 3-4" },
+            { f: "【並べかえ】(I reached / was / cleaned / the room / being / when) the hotel.", b: "The room was being cleaned when I reached the hotel.", h: "Lesson 11 Ex 3-5 (過去進行形の受動態)" },
+            { f: "【英作】今この瞬間にも、たくさんの水が世界中で使われている。 (around the world at this very moment.)", b: "A lot of water is being used around the world at this very moment.", h: "Lesson 11 Ex 4-1 (現在進行形の受動態)" },
+            { f: "【英作】子どもは危険から守られなければならない。 (from danger.)", b: "Children must be protected from danger.", h: "Lesson 11 Ex 4-2" },
+            { f: "【英作】彼の言葉は誰にも信じてもらえないだろう。 (by anybody.)", b: "His words won't [will not] be believed by anybody.", h: "Lesson 11 Ex 4-3" },
+            { f: "【英作】財布はどこで見つかりましたか。", b: "Where was the [your] wallet found?", h: "Lesson 11 総合 (疑問詞 + 過去の受動態)" },
+            { f: "【英作】ごはんはたった今食べられたところだ。", b: "The meal has just been eaten.", h: "Lesson 11 総合 (現在完了の受動態)" },
+            { f: "【例文】Mary was given a gold medal.", b: "メアリーは金メダルを与えられた。", h: "give型の人(Mary)を主語にした受動態" },
+            { f: "【例文】The gold medal was given to Mary.", b: "金メダルはメアリーに与えられた。", h: "give型の物(gold medal)を主語にした受動態" },
+            { f: "【例文】This bag was bought for me by my grandmother.", b: "このバッグは祖母によって私のために買われた。", h: "buy型の物(bag)を主語にした受動態" },
+            { f: "【例文】The baby was named Catherine by her parents.", b: "その赤ん坊は両親によってキャサリンと名付けられた。", h: "SVOCの受動態 (Cが残る)" },
+            { f: "【例文】It is said (that) he is very rich.", b: "彼はとても金持ちだと言われている。", h: "It is said that ~ 構文" },
+            { f: "【例文】He is said to be very rich.", b: "彼はとても金持ちだと言われている。", h: "S is said to do 構文" },
+            { f: "【例文】I was spoken to by a foreigner this morning.", b: "私は今朝、外国人に話しかけられた。", h: "群動詞(speak to)の受動態" },
+            { f: "【例文】The road is covered with snow.", b: "その道路は雪で覆われている。", h: "by以外の前置詞 (covered with)" },
+            { f: "【例文】We were surprised at the news.", b: "私たちはその知らせに驚いた。", h: "感情を表す受動態 (surprised at)" },
+            { f: "【例文】He was injured in last night's game.", b: "彼は昨夜の試合でケガをした。", h: "被害を表す受動態 (injured in)" },
+            { f: "【例文】She is married to a colleague.", b: "彼女は同僚と結婚している。", h: "日本語では受け身の感覚がない表現 (married to)" },
+            { f: "【書換】Amy's grandparents told her a lot of fairy tales. (herを主語に)", b: "She was told a lot of fairy tales by Amy's grandparents.", h: "Lesson 12 Ex 1-1" },
+            { f: "【書換】Terry bought Sally a picture book. (a picture bookを主語に)", b: "A picture book was bought for Sally by Terry.", h: "Lesson 12 Ex 1-2 (buy型はfor)" },
+            { f: "【書換】Mayu must keep her room clean. (her roomを主語に)", b: "Her room must be kept clean by Mayu.", h: "Lesson 12 Ex 1-3" },
+            { f: "【書換】Ken showed me a good watch. (a good watchを主語に)", b: "A good watch was shown to me by Ken.", h: "Lesson 12 Ex 1-4 (show型はto)" },
+            { f: "【書換】What do you call this bird in English? (受動態に)", b: "What is this bird called in English?", h: "Lesson 12 Ex 1-5" },
+            { f: "【穴埋め】The students know the song well.\nThe song (  ) (  ) well (  ) the students.", b: "is, known, to", h: "Lesson 12 Ex 2-1 (be known to ~)" },
+            { f: "【穴埋め】The rumor hurt her feelings.\nHer feelings (  ) (  ) (  ) the rumor.", b: "were, hurt, by", h: "Lesson 12 Ex 2-2" },
+            { f: "【穴埋め】We will call off the outdoor party if it rains.\nThe outdoor party will (  ) (  ) (  ) if it rains.", b: "be, called, off", h: "Lesson 12 Ex 2-3 (群動詞の受動態)" },
+            { f: "【穴埋め】It is said that the actor has a lot of fans.\nThe actor (  ) (  ) (  ) have a lot of fans.", b: "is, said, to", h: "Lesson 12 Ex 2-4" },
+            { f: "【穴埋め】The result satisfied them.\nThey were (  ) (  ) the result.", b: "satisfied, with", h: "Lesson 12 Ex 2-5 (感情の受動態)" },
+            { f: "【穴埋め】We covered the table with a tablecloth.\nThe table (  ) (  ) (  ) a tablecloth.", b: "was, covered, with", h: "Lesson 12 Ex 2-6" },
+            { f: "【並べかえ】My father (my / worried / is / future). [1語補う]", b: "My father is worried about my future.", h: "Lesson 12 Ex 3-1 (aboutを補う)" },
+            { f: "【並べかえ】The box (oranges / was / fresh / filled). [1語補う]", b: "The box was filled with fresh oranges.", h: "Lesson 12 Ex 3-2 (withを補う)" },
+            { f: "【並べかえ】Tom (laughed / classmates / by / was / his). [1語補う]", b: "Tom was laughed at by his classmates.", h: "Lesson 12 Ex 3-3 (atを補う。laugh at)" },
+            { f: "【並べかえ】This dress (made / me / for / was) my mother. [1語補う]", b: "This dress was made for me by my mother.", h: "Lesson 12 Ex 3-4 (byを補う)" },
+            { f: "【並べかえ】The bus (crowded / foreign / was / people) this morning. [1語補う]", b: "The bus was crowded with foreign people this morning.", h: "Lesson 12 Ex 3-5 (withを補う)" },
+            { f: "【英作】この庭はキングさんが世話をしている。 (take care of)", b: "This garden is taken care of by Ms. King.", h: "Lesson 12 Ex 4-1" },
+            { f: "【英作】久石譲はすばらしい作曲家だと言われている。", b: "It is said that Jo Hisaishi is an excellent composer.", h: "Lesson 12 Ex 4-2" },
+            { f: "【英作】私は羽生結弦選手の演技に感動しました。 (impress)", b: "I was impressed with Yuzuru Hanyu's performance.", h: "Lesson 12 Ex 4-3" },
+            { f: "【英作】壁は白く塗られるだろう。", b: "The wall will be painted white.", h: "Lesson 12 Ex 4-4 (SVOCの受動態 + 未来形)" },
+            { f: "【英作】家に帰る途中、にわか雨にあった。(be caught in を使用)", b: "I was caught in a shower on my way home.", h: "Lesson 12 総合" },
+            { f: "【例文】It's important to get enough sleep.", b: "十分な睡眠をとることは重要だ。", h: "不定詞の名詞的用法（形式主語）" },
+            { f: "【例文】Her dream is to be a singer.", b: "彼女の夢は歌手になることだ。", h: "不定詞の名詞的用法（補語）" },
+            { f: "【例文】I hope to go to university.", b: "私は大学に行くことを望んでいる。", h: "不定詞の名詞的用法（目的語）" },
+            { f: "【例文】I found it easy to book a hotel online.", b: "オンラインでホテルを予約するのは簡単だとわかった。", h: "不定詞の名詞的用法（形式目的語）" },
+            { f: "【例文】Luckily, he had friends to help him.", b: "幸運なことに、彼には助けてくれる友達がいた。", h: "不定詞の形容詞的用法" },
+            { f: "【例文】Bring a notebook and something to write with.", b: "ノートと何か書くもの（ペンなど）を持ってきなさい。", h: "不定詞の形容詞的用法（前置詞の目的語）" },
+            { f: "【例文】I got up early to catch the 6:30 train.", b: "私は6時30分の電車に乗るために早く起きた。", h: "不定詞の副詞的用法（目的）" },
+            { f: "【例文】He woke up to find himself in the hospital.", b: "彼は目を覚ますと自分が病院にいることに気付いた。", h: "不定詞の副詞的用法（結果）" },
+            { f: "【穴埋め】私には助けてくれる人がいなかった。\nI had no one (  ) (  ) me.", b: "to, help", h: "Lesson 13 Ex 1-1" },
+            { f: "【穴埋め】彼の筆跡を読み解くことは不可能だ。\n(  ) impossible (  ) read his handwriting.", b: "It's, to", h: "Lesson 13 Ex 1-2" },
+            { f: "【穴埋め】彼女には話ができる友達がたくさんいます。\nShe has a lot of friends (  ) (  ) with.", b: "to, talk", h: "Lesson 13 Ex 1-3" },
+            { f: "【穴埋め】メアリーの望みは新しいiPhoneを手に入れることだった。\nMary's wish (  ) (  ) (  ) a new iPhone.", b: "was, to, get", h: "Lesson 13 Ex 1-4" },
+            { f: "【穴埋め】彼はこの川で泳ぐことは危険だとわかった。\nHe found (  ) dangerous (  ) swim in this river.", b: "it, to", h: "Lesson 13 Ex 1-5" },
+            { f: "【和訳】I'm sorry to bother you, but there is a phone call for you.", b: "お手数をおかけしてすみませんが、あなたに電話です。", h: "Lesson 13 Ex 2-1 (感情の原因)" },
+            { f: "【和訳】He can't be kind to other people to tell such a bad joke.", b: "あんな悪い冗談を言うなんて、彼が他の人に親切なはずがない。", h: "Lesson 13 Ex 2-2 (判断の根拠)" },
+            { f: "【和訳】He made a promise to send me an email every day.", b: "彼は毎日私にメールを送るという約束をした。", h: "Lesson 13 Ex 2-3 (名詞の内容を説明する同格)" },
+            { f: "【和訳】There was nothing to eat in the refrigerator.", b: "冷蔵庫には食べるものが何もなかった。", h: "Lesson 13 Ex 2-5 (形容詞的用法)" },
+            { f: "【並べかえ】I (planning / a three-day trip / to / am / to Kanazawa / take).", b: "I am planning to take a three-day trip to Kanazawa.", h: "Lesson 13 Ex 4-1" },
+            { f: "【並べかえ】Tony (the / speak / to / ability / three languages / has).", b: "Tony has the ability to speak three languages.", h: "Lesson 13 Ex 4-2" },
+            { f: "【並べかえ】(useless / I / to / it / talk / think) to my mother about it.", b: "I think it useless to talk to my mother about it.", h: "Lesson 13 Ex 4-4 (形式目的語)" },
+            { f: "【並べかえ】(receive / were / to / a warm welcome / the tourists / delighted) at the airport.", b: "The tourists were delighted to receive a warm welcome at the airport.", h: "Lesson 13 Ex 4-5" },
+            { f: "【英作】洗わなければならない服がたくさんある。", b: "I have a lot of clothes to wash.", h: "Lesson 13 総合" },
+            { f: "【英作】目を覚めたら部屋に一人ぼっちだった。", b: "I woke up to find myself alone in the room.", h: "Lesson 13 総合" },
+            { f: "【例文】It's dangerous for the children to stay here.", b: "子どもたちがここにとどまるのは危険だ。", h: "不定詞の意味上の主語 (for)" },
+            { f: "【例文】It was kind of you to help me.", b: "手伝ってくれるなんてあなたは親切だった。", h: "人の性質を表す形容詞 + of" },
+            { f: "【例文】I want you to come to tomorrow's party.", b: "あなたに明日のパーティーに来てほしい。", h: "SVO + to不定詞" },
+            { f: "【例文】She told me not to be late.", b: "彼女は私に遅れないようにと言った。", h: "不定詞の否定形 (not to)" },
+            { f: "【例文】My mother made me clean my room.", b: "母は私に部屋を掃除させた。", h: "使役動詞 make + 原形不定詞" },
+            { f: "【例文】I saw the man get out of the car.", b: "私はその男が車から降りるのを見た。", h: "知覚動詞 + 原形不定詞" },
+            { f: "【英作】子どもたちが静かに1時間待つことは難しい。\nIt's hard (                               ) in silence for one hour.", b: "for the children to wait", h: "Lesson 14 Ex 1-1" },
+            { f: "【英作】ドアのカギを開けたままにしておくなんて、君は不注意だったね。\nIt was (                               ) leave the door unlocked.", b: "careless of you to", h: "Lesson 14 Ex 1-3" },
+            { f: "【和訳】(a) The doctor did not advise me to exercise.\n(b) The doctor advised me not to exercise.", b: "(a) 医者は私に運動するようにとは勧めなかった。\n(b) 医者は私に運動しないように勧めた。", h: "Lesson 14 Ex 2-2" },
+            { f: "【穴埋め】私たちにはドアのベルが鳴るのが聞こえなかった。\nWe didn't (  ) the doorbell (  ).", b: "hear, ring", h: "Lesson 14 Ex 3-1" },
+            { f: "【穴埋め】彼にあなたの作文を読んでもらいましたか。\nDid you (  ) (  ) (  ) your essay?", b: "have, him, read", h: "Lesson 14 Ex 3-2 (使役動詞 have)" },
+            { f: "【穴埋め】その大統領は国民に海外に行かないように命令した。\nThe President (  ) the people (  ) (  ) (  ) abroad.", b: "ordered, not, to, go", h: "Lesson 14 Ex 3-4" },
+            { f: "【穴埋め】もう1つ質問をさせてください。\n(  ) me (  ) you one more question.", b: "Let, ask", h: "Lesson 14 Ex 3-5" },
+            { f: "【並べかえ】(a report / you / enable / a computer / will / to / write) quickly.", b: "A computer will enable you to write a report quickly.", h: "Lesson 14 Ex 4-1 (enable O to do)" },
+            { f: "【並べかえ】His mother (came home / let / watch TV / because / didn't / him / he) late.", b: "His mother didn't let him watch TV because he came home late.", h: "Lesson 14 Ex 4-3 (使役動詞 let)" },
+            { f: "【並べかえ】(got / me / my boss / check / to) the document twice.", b: "My boss got me to check the document twice.", h: "Lesson 14 Ex 4-5 (get O to do)" },
+            { f: "【英作】小さな猫が通りを渡るのを見た。", b: "I saw a little cat cross the street.", h: "Lesson 14 総合 (知覚動詞)" },
+            { f: "【並べかえ】His mother (came home / let / watch TV / because / didn't / him / he) late.", b: "His mother didn't let him watch TV because he came home late.", h: "Lesson 14 Ex 4-3" },
+            { f: "【並べかえ】Sarah (not / out / her daughter / to / told / go) after dark.", b: "Sarah told her daughter not to go out after dark.", h: "Lesson 14 Ex 4-4" },
+            { f: "【並べかえ】(got / me / my boss / check / to) the document twice.", b: "My boss got me to check the document twice.", h: "Lesson 14 Ex 4-5" },
+            { f: "【英作】小さな猫が通りを渡るのを見た。", b: "I saw a little cat cross the street.", h: "Lesson 14 総合1" },
+            { f: "受動態の基本形と意味", b: "〈be動詞+過去分詞〉の形で「Sは〜される」という意味を表す。", h: "能動態の目的語が主語になり、話題の中心となる。" },
+            { f: "受動態における動作主の示し方", b: "by + 動作主", h: "She is loved ___ the kids." },
+            { f: "受動態の文で動作主(by ~)を省略するケース", b: "動作主が重要でない場合、不明確な場合、「不特定の人々（we, you, peopleなど）」の場合、明らかすぎる場合など。", h: "German is spoken in Austria." },
+            { f: "助動詞を含む受動態の形", b: "助動詞 + be + 過去分詞", h: "This essay must ___ ___ by tomorrow." },
+            { f: "未来を表す受動態の形", b: "will be + 過去分詞", h: "His new movie ___ ___ released in May." },
+            { f: "進行形の受動態の形", b: "〈be動詞 + being + 過去分詞〉", h: "A new building is ___ ___ on the corner." },
+            { f: "完了形の受動態の形", b: "〈have [has, had, will have] been + 過去分詞〉", h: "It has just ___ painted." },
+            { f: "give型動詞(SVOO)を受動態にし、O(物)を主語にする場合の前置詞", b: "to （〈SVO + to + 人〉の形から受動態を作る）", h: "The gold medal was given ___ Mary." },
+            { f: "buy型動詞(SVOO)を受動態にし、O(物)を主語にする場合の前置詞", b: "for （〈SVO + for + 人〉の形から受動態を作る）", h: "This bag was bought ___ me by my grandmother." },
+            { f: "SVOCの受動態における補語(C)の扱い", b: "〈be動詞+過去分詞〉の後にそのまま続ける。", h: "The baby was named Catherine by her parents." },
+            { f: "sayを使った受動態の2種類の形（「彼は金持ちだと言われている」）", b: "It is said (that) he is very rich. / He is said to be very rich.", h: "Itを主語にする形と、That節内の主語(He)を主語にする形。" },
+            { f: "群動詞（句動詞）の受動態の作り方", b: "群動詞全体を1つの動詞と考え、前置詞などを残したまま受動態にする。", h: "I was spoken ___ ___ a foreigner." },
+            { f: "by以外の前置詞を使う受動態の慣用表現（「〜で覆われている」「〜で満たされている」）", b: "be covered with ~ / be filled with ~", h: "The road is covered ___ snow." },
+            { f: "感情を表す受動態の慣用表現（「〜に驚く」「〜に満足する」）", b: "be surprised at ~ / be satisfied with ~ など", h: "We were surprised ___ the news." },
+            { f: "被害を表す受動態の表現（「ケガをする」「渋滞・にわか雨にあう」）", b: "be injured (in ~) / be caught in ~", h: "He was injured ___ last night's game." },
+            { f: "日本語では受け身の感覚がない受動態表現（「結婚している」「生まれる」）", b: "be married to ~ / be born など", h: "She is married ___ a colleague." },
+            { f: "不定詞の名詞的用法（形式主語）の基本構文", b: "It is ~ to do", h: "___'s important ___ get enough sleep." },
+            { f: "不定詞の名詞的用法（形式目的語）の基本構文", b: "S + V + it + C + to do", h: "I found ___ easy ___ book a hotel online." },
+            { f: "不定詞の形容詞的用法における前置詞を伴う同格表現（「何か書くためのもの＝ペン等」）", b: "something to write with", h: "write with something の関係。前置詞を省略できない。" },
+            { f: "不定詞の副詞的用法（感情の原因）", b: "glad / happy / sorry / surprised 等の感情を表す形容詞 + to do", h: "I'm glad ___ see you." },
+            { f: "不定詞の副詞的用法（結果を表す慣用表現）", b: "wake up to find ~ (目を覚まして〜に気付く), only to do (結局〜しただけだった), never to do (二度と〜しない) など", h: "He woke up ___ ___ himself in the hospital." },
+            { f: "不定詞の意味上の主語を示す基本の形", b: "〈for + 名詞・代名詞〉を不定詞の直前に置く。", h: "It's dangerous ___ the children to stay here." },
+            { f: "人の性質や人柄を示す形容詞がある場合の、不定詞の意味上の主語", b: "〈of + 名詞・代名詞〉を不定詞の直前に置く。", h: "It was kind ___ you to help me." },
+            { f: "「Oに〜してほしい」を表す SVO+to不定詞（希望・願望の動詞）", b: "want / like / would like + O + to do", h: "I ___ you ___ come to tomorrow's party." },
+            { f: "「Oが〜するのを許す / 可能にする」を表す SVO+to不定詞（許可・使役の動詞）", b: "allow / permit / enable + O + to do", h: "My parents won't ___ me ___ study abroad." },
+            { f: "「Oに〜するように命じる / 頼む / 説得する」を表す SVO+to不定詞（命令・依頼の動詞）", b: "tell / ask / advise / persuade + O + to do", h: "He ___ me ___ save a seat for him." },
+            { f: "不定詞の否定形", b: "不定詞の直前に not または never を置く。", h: "She told me ___ ___ be late." },
+            { f: "使役動詞 (make, have, let) の構文と意味", b: "使役動詞 + O + 原形不定詞(do) 「Oに〜させる」", h: "My mother ___ me clean my room." },
+            { f: "知覚動詞 (see, hear, feel等) の構文と意味", b: "知覚動詞 + O + 原形不定詞(do) 「Oが〜するのを･･･する」", h: "I ___ the man get out of the car." },
+            { f: "使役動詞(make)や知覚動詞を受動態で使う場合の変化", b: "原形不定詞ではなく、to不定詞を伴う形になる。", h: "I was made ___ clean my room." }
         ];
+
+        // ================= Lesson 15, 16 関連の重複問題を削除する処理 =================
+        const keywordsToRemove = [
+            "when to begin", "have come", "be submitted", "how to get to the station", 
+            "which bus to take", "in trouble", "appear to have run", "leading part",
+            "whose suggestion", "where to have lunch", "introduced to her", "since last night",
+            "Mike seemed to", "learners of French", "innocent of the crime", "at a loss",
+            "paper crane", "wanted her to love", "what to order", "pretended not to",
+            "born in India", "appreciated by that critic", "known of the incident", "mistaken for his father",
+            "where to set up", "sick for a few days", "repainted", "elected as a new chief",
+            "how to use the machine", "given many toys", "what to do next", "computer seemed to be broken",
+            "diligent", "how to play", "Chaplin of our time", "never to return",
+            "married to John", "go fishing", "TENET", "locked on the inside",
+            "brave enough", "make matters worse", "happened to", "pull the sleigh",
+            "too old to live", "convenient to take", "first train", "too upset to",
+            "too young to join", "stars were to be seen", "so as not to fail", "generous enough",
+            "easy to write with", "in order not to forget", "too far to walk", "tough for foreigners",
+            "are to have lunch", "old enough to travel", "free time to", "hard to believe",
+            "kindergarten", "pleasant to talk", "safe to eat"
+        ];
+
+        // workbookDataRaw をフィルタリングして不要なものを削除
+        const filteredWorkbookData = workbookDataRaw.filter(card => {
+            const textToCheck = (card.f + " " + card.b + " " + (card.h || "")).toLowerCase();
+            return !keywordsToRemove.some(keyword => textToCheck.includes(keyword.toLowerCase()));
+        });
 
         // ================= マスターデータの構築 =================
         const allFlashcards = [];
@@ -387,8 +649,8 @@
             allFlashcards.push({ lesson: "2_5", category: cat, front: fText, back: card.a, hint: `No. ${card.no}` });
         });
 
-        // Lesson 11-16をフォーマット
-        lesson11to16Data.forEach(card => {
+        // Lesson 11-14をフォーマット
+        lesson11to14Data.forEach(card => {
             let cat = "文法ポイント";
             let fText = card.front;
             const match = fText.match(/^【(.*?)】(.*)/s);
@@ -400,14 +662,12 @@
             else if (searchTxt.includes("Lesson 12")) l = "12";
             else if (searchTxt.includes("Lesson 13")) l = "13";
             else if (searchTxt.includes("Lesson 14")) l = "14";
-            else if (searchTxt.includes("Lesson 15")) l = "15";
-            else if (searchTxt.includes("Lesson 16")) l = "16";
 
             allFlashcards.push({ lesson: l, category: cat, front: fText, back: card.back, hint: card.hint });
         });
 
         // Workbookをフォーマット
-        workbookDataRaw.forEach(card => {
+        filteredWorkbookData.forEach(card => {
             let cat = "文法ポイント";
             let fText = card.f;
             const match = fText.match(/^【(.*?)】(.*)/s);
@@ -729,14 +989,12 @@
 
         const menuItems = [
             { id: "review", title: "Review", subtitle: "できなかった問題", icon: "fa-star", color: "amber" },
-            { id: "11", title: "Lesson 11", subtitle: "受動態①", icon: "fa-1", color: "blue" },
-            { id: "12", title: "Lesson 12", subtitle: "受動態②", icon: "fa-2", color: "indigo" },
-            { id: "13", title: "Lesson 13", subtitle: "不定詞①", icon: "fa-3", color: "emerald" },
-            { id: "14", title: "Lesson 14", subtitle: "不定詞②", icon: "fa-4", color: "teal" },
-            { id: "15", title: "Lesson 15", subtitle: "不定詞③", icon: "fa-5", color: "orange" },
-            { id: "16", title: "Lesson 16", subtitle: "不定詞④", icon: "fa-6", color: "rose" },
-            { id: "11_16_all", title: "Lesson 11-16 総合", subtitle: "受動態・不定詞 全範囲", icon: "fa-layer-group", color: "slate" },
-            { id: "workbook", title: "Workbook", subtitle: "例文・練習問題", icon: "fa-book", color: "cyan" },
+            { id: "11", title: "Workbook Lesson 11", subtitle: "受動態①", icon: "fa-1", color: "blue" },
+            { id: "12", title: "Workbook Lesson 12", subtitle: "受動態②", icon: "fa-2", color: "indigo" },
+            { id: "13", title: "Workbook Lesson 13", subtitle: "不定詞①", icon: "fa-3", color: "emerald" },
+            { id: "14", title: "Workbook Lesson 14", subtitle: "不定詞②", icon: "fa-4", color: "teal" },
+            { id: "11_14_all", title: "Workbook 11-14 総合", subtitle: "受動態・不定詞 全範囲", icon: "fa-layer-group", color: "slate" },
+            { id: "workbook", title: "本冊例文と練習問題", subtitle: "例文・練習問題", icon: "fa-book", color: "cyan" },
             { id: "2_5", title: "Insight", subtitle: "2章・5章", icon: "fa-book-open", color: "purple" },
             { id: "all", title: "完全網羅 (全問)", subtitle: "全問題 シャッフル", icon: "fa-globe", color: "rose" }
         ];
